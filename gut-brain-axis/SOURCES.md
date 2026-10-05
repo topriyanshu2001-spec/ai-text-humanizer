@@ -1,10 +1,13 @@
 # Open items before submission
 
-The full verified reference library is in `REFERENCES.md` (106 entries, grouped by the section
-each supports). Every entry was checked against the published record before admission; none was
-written from memory, no DOI was constructed, and no author name was expanded from initials.
+**The reference list now sits inside `MANUSCRIPT.md`**, after the Declarations, numbered 1–106 in
+order of first appearance — the format the authors' own submitted article uses and the one
+numbered-citation journals require. `REFERENCES.md` is kept as a working library, grouped by
+theme, for checking; it is not the submission artefact.
 
-Every one of the 106 is cited in the text, and no citation in the text lacks a library entry.
+Every entry was checked against the published record before admission; none was written from
+memory, no DOI was constructed, and no author name was expanded from initials. All 106 are cited,
+and every citation resolves to an entry.
 
 This file lists what is **still open**. It is short, and it is not optional.
 
@@ -31,25 +34,39 @@ attribution is precisely the failure the manuscript criticises two sections late
 
 ## 2. Two meta-analytic records, §3.6 and Table 1
 
-Reference [38] (*Nutr Rev* 2025;83(7):e1504) carries the probiotic pooled estimates: SMD −0.96
+Reference **64** (*Nutr Rev* 2025;83(7):e1504) carries the probiotic pooled estimates: SMD −0.96
 (95% CI −1.31 to −0.61), I² = 85%, the ~⅓ fall after excluding high risk-of-bias studies, and
 the −0.53 (95% CI −0.67 to −0.39) figure. **Its author list was not confirmed.**
 
-Reference [42] (*Front Psychiatry* 2026, Fu J et al.) carries the FMT null result: SMD −0.10
+Reference **68** (*Front Psychiatry* 2026, Fu J et al.) carries the FMT null result: SMD −0.10
 (95% CI −0.60 to 0.41) from seven studies in 235 participants. **Volume and article number were
 not confirmed.** The Hedges' g −0.81 and SMD ≈ −1.21 estimates quoted alongside come from two
 further FMT syntheses whose records were not captured; attribute them or drop them.
 
 These are the manuscript's most load-bearing numbers. Confirm them first.
 
-## 3. Fourteen entries with a `~` field
+## 3. Nine entries with one bibliographic field unconfirmed
 
-Marked individually in `REFERENCES.md`. In each case the paper and its finding are verified; a
+**Numbers below refer to the manuscript's reference list**, which is numbered in order of first
+appearance, as the journal requires. In each case the paper and its finding are verified; a
 volume, page range or full author list was not displayed in a verified search result. Each needs
 a one-minute check at the journal page.
 
-Entries affected: 15, 34, 38, 39, 42, 97, 103, 104, 105, 106, plus four where only the author
-list is short.
+| Ref # in manuscript | Source | What is missing |
+|---|---|---|
+| 17 | Nikolova VL et al. JAMA Psychiatry 2021 | volume/pages |
+| 38 | Mitchell KJ et al. Neuron 2025 | volume/pages |
+| 39 | Tysnes OB et al. Ann Neurol 2015 | full author list |
+| 48 | Allen JM et al. Med Sci Sports Exerc 2018 | volume/pages |
+| 64 | Nutr Rev 2025;83(7):e1504 | **entire author list — reference is incomplete as it stands** |
+| 67 | Green JE et al. Can J Psychiatry 2023 | volume/pages |
+| 68 | Fu J et al. Front Psychiatry 2026 | volume/article number |
+| 103 | GBD 2021 Mental Disorders Collaborators, Lancet Psychiatry 2024 | volume/pages |
+| 105, 106 | Mayer EA et al. Mol Psychiatry 2023; Ford AC et al. Lancet 2020 | volume/pages |
+
+Reference 64 is the urgent one: it currently reads `[AUTHOR LIST TO BE SUPPLIED]` in the
+manuscript, because no author list was confirmed. It also carries the probiotic pooled estimates
+quoted in Section 3.6 and Table 1.
 
 ## 4. Methods section placeholder, §2
 

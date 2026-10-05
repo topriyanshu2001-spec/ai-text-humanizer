@@ -6,12 +6,29 @@ traditional-medicine content.
 
 | file | what it is |
 |---|---|
-| `MANUSCRIPT.md` | the review: 6,208 words main text, 241-word abstract, 4 tables, 2 figure legends, 106 verified references |
+| `MANUSCRIPT.md` | the complete submission-shaped manuscript: 5,835 words main text, 241-word abstract, 4 tables, 2 figure legends, **and the full 106-entry reference list inside the document**, numbered in order of first appearance |
 | `Gut_Brain_Neuroepithelial_Review_v1.docx` | the same manuscript as Word, double-spaced, tables rendered, editorial callouts in red |
-| `REFERENCES.md` | the verified reference library: 106 entries grouped by the section each supports |
+| `REFERENCES.md` | working library only — the same 106 entries grouped by theme, for checking. Not the submission artefact |
 | `SOURCES.md` | the five items still open before submission |
 | `Gut_Brain_References_v1.docx` | the reference list as Word |
 | `build_docx.py` | Markdown → .docx builder: Times New Roman throughout, every run black, double-spaced (never 1.5) |
+
+## Manuscript structure
+
+Built to match the house format of the authors' own submitted article in this repository
+(`migraine/`), which is the right exemplar for a numbered-citation journal:
+
+1. Article type, title, running title, authors, affiliations, corresponding author
+2. Word-count line
+3. Structured abstract, then keywords
+4. Numbered sections (1–11), with tables and figure legends set where they are first discussed
+5. Declarations — funding, conflicts, CRediT contributions, data availability, AI use, ethics
+6. **References, inside the document**, numbered 1–106 in order of first appearance
+
+Point 6 is the one that matters. A manuscript must be self-contained: an editor receives one
+file, and a reference list living in a separate document is not a reference list. Numbering runs
+by first appearance rather than by theme, which is what Vancouver style requires — reference 1 is
+the first work cited in the introduction, not the first work alphabetically or topically.
 
 ## The argument
 
