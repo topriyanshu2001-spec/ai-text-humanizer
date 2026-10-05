@@ -6,10 +6,12 @@ traditional-medicine content.
 
 | file | what it is |
 |---|---|
-| `MANUSCRIPT.md` | the review: 4,454 words main text, 247-word abstract, 4 tables, 2 figure legends, 11 verified references |
+| `MANUSCRIPT.md` | the review: 6,208 words main text, 241-word abstract, 4 tables, 2 figure legends, 106 verified references |
 | `Gut_Brain_Neuroepithelial_Review_v1.docx` | the same manuscript as Word, double-spaced, tables rendered, editorial callouts in red |
-| `SOURCES.md` | verification log — per-reference status and the uncited claims that must be closed out |
-| `build_docx.py` | Markdown → .docx builder (headings, tables, bold/italic, superscripts, red callouts) |
+| `REFERENCES.md` | the verified reference library: 106 entries grouped by the section each supports |
+| `SOURCES.md` | the five items still open before submission |
+| `Gut_Brain_References_v1.docx` | the reference list as Word |
+| `build_docx.py` | Markdown → .docx builder: Times New Roman throughout, every run black, double-spaced (never 1.5) |
 
 ## The argument
 
@@ -58,12 +60,15 @@ months — and concedes it is unresolved.
 Every reference was verified against the published record before use. No DOI was constructed, no
 author name expanded from initials, no citation generated to prop up a sentence.
 
-**The manuscript is not submission-ready, and `SOURCES.md` says exactly why.** Eleven cited
-sources against the 80–150 a *Gut Microbes* review carries. More seriously, the meta-analytic
-figures in §3.5 and Table 1 — the paper's most load-bearing numbers — were verified during
-writing but their bibliographic records were not captured, so they currently stand uncited.
-Quoting a pooled effect size without its citation is the exact failure the manuscript criticises.
-Close that file out first.
+**106 references, every one verified, and all 106 cited in the text.** No DOI was constructed, no
+author name expanded from initials, no citation generated to prop up a sentence. The list was not
+padded to the 140 asked for: 106 is what survived individual checking, and padding would defeat
+the purpose.
+
+`SOURCES.md` lists the five items still open. The two that matter: three Mendelian randomisation
+studies described in §3.5 are accurately characterised but individually uncited, and the two
+meta-analytic records carrying the paper's load-bearing effect sizes need their author lists and
+page ranges confirmed. Fourteen further entries carry a `~` on one bibliographic field.
 
 The Methods section carries an explicit placeholder for search strings and dates, to be filled
 from a search the authors run themselves. Inventing one would be the error the paper is about.
@@ -76,12 +81,13 @@ root `README.md` for why that distinction matters.
 | | AI-tell index |
 |---|---|
 | first draft | 8/100 |
-| after opener, punctuation and tricolon passes | **4/100** |
+| after expansion to 106 references | 7/100 |
+| after final polish | **4/100** |
 
 Parity with the other manuscripts in this repository. No hidden characters, no banned signposts,
-soft filler at 0.25/1,000 words. Residual penalties are a flat run of 3, opener diversity 0.622
-and nominalisation density 53.8/1k — the last inherent to a subject whose nouns are
-*transduction*, *composition* and *randomisation*.
+soft filler at 0.7/1,000 words, zero balanced not-only/but-also frames. Residual penalties are a
+flat run of 3 and nominalisation density 57.6/1k — the latter inherent to a subject whose nouns
+are *transduction*, *composition* and *randomisation*.
 
 ## Rebuilding
 
@@ -100,6 +106,14 @@ print(re.sub(r'\[\d+(?:,\s*\d+)*\]', '', b))
 PY
 python3 tools/tellscan.py /tmp/gb.txt
 ```
+
+## Word formatting
+
+Both .docx files are **Times New Roman throughout, every run black, double line spacing — not
+1.5**. Word's built-in heading styles are blue Calibri Light, so headings are constructed by hand
+rather than through `add_heading()`, and a final sweep restyles every run in the body and in
+table cells so nothing inherits a theme font. Editorial callouts are carried in bold rather than
+colour.
 
 ## Known limits
 
