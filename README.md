@@ -8,10 +8,17 @@ unhighlighted ones, so the discriminator is measured rather than guessed.
 
 **The two manuscripts needed different diagnoses, which is the main lesson here.**
 
-| manuscript | Turnitin | what actually separated flagged from clean |
+| manuscript | Turnitin | what separated flagged from clean |
 |---|---|---|
-| Rasayana / Dushi Visha | 29% | **specificity density** — flagged passages carried 2.4× fewer numerals and 2× fewer citations (held up under a within-paragraph control) |
-| Migraine / Ardhavabhedaka | 26% | **nothing measurable** — a 21-metric permutation battery found no separation surviving correction; flagged passages had *more* numerals and identical rhythm. The actionable finding was positional |
+| Rasayana / Dushi Visha | 29% → **34%** after rewrite | first read as specificity density; **the resubmission falsified it** — see `V8_RESULT.md` |
+| Migraine / Ardhavabhedaka | 26% | **nothing measurable** — a 21-metric permutation battery found no separation surviving correction |
+
+**The most important result in this repository is a negative one.** On 13,116 characters that are
+byte-identical between the Rasayana v7 and v8 submissions, Turnitin's flag rate moved from 1.1% to
+19.3%; four paragraphs went from 0% to 96%, 95%, 80% and 47%. Measured editing effect: −267 flagged
+words. Measured run-to-run noise: +339. The noise is larger than the signal, so a loop against
+Turnitin cannot converge, and the flagged/clean splits both diagnoses were built on are
+substantially unstable. `V8_RESULT.md` has the full decomposition.
 
 In neither case did rhythm matter. Both drafts already had strong sentence variance and zero
 signpost vocabulary, and both scored 3/100 on the local prose index while Turnitin returned
@@ -21,8 +28,11 @@ signpost vocabulary, and both scored 3/100 on the local prose index while Turnit
 
 | path | what it is |
 |---|---|
-| `Rasayana_DushiVisha_v8.docx` | revised Rasayana manuscript, ready to resubmit |
-| `FORENSICS.md` | why Rasayana v7 was flagged at 29%, what changed, honest limits |
+| `V8_RESULT.md` | **read first** — what the v8 resubmission measured, and what it invalidates |
+| `Rasayana_DushiVisha_v9.docx` | current Rasayana manuscript, title page intact, for the journal |
+| `Rasayana_DushiVisha_v9_for_AI_check.docx` | same body, title page removed, for the AI check |
+| `Rasayana_DushiVisha_v8.docx` | the 34% submission, kept for the comparison |
+| `FORENSICS.md` | the v7 analysis, partly superseded by `V8_RESULT.md` |
 | `migraine/Migraine_Beyond_CGRP_Ardhavabhedaka_Review_v2.docx` | revised migraine manuscript |
 | `migraine/FORENSICS.md` | the migraine analysis, including the hypothesis that was tested and retired |
 | `migraine/tools/` | its rewrite module, builder, parallelism metric and flag mask |

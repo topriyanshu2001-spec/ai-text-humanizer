@@ -1,5 +1,12 @@
 # Rasayana / Dushi Visha review — AI-flag forensics and v8 rewrite
 
+> **Superseded in part. v8 was resubmitted and came back at 34%, up from 29%.**
+> The specificity-density diagnosis below is **no longer supportable as stated**: it was derived
+> from a flagged/clean split that did not reproduce on resubmission — paragraphs scored 0% in v7
+> came back at 96% with not one character changed. Read `../V8_RESULT.md` first. What survives
+> from this document is the method (extract the highlights, measure, don't guess) and the finding
+> that structural changes moved regions where rewording did not.
+
 Source report: Turnitin AI Writing report on `Rasayana_DushiVisha_v7.docx`
 (submission `trn:oid:::27005:153557119`, 3 Oct 2026, 4,261 words). **29% detected as AI.**
 
@@ -119,6 +126,9 @@ Conclusion: 21.9 → 120.3 numerals/1k, mean sentence 28.5 → 17.1 w.
 * Images (2), tables (2), reference list (68 entries) and author block carried over intact.
 
 ## 5. Honest limits
+
+*(Written before the v8 resubmission. The limits turned out to be larger than stated here —
+see `../V8_RESULT.md` for the measured run-to-run instability.)*
 
 Turnitin publishes no per-document score to iterate against and returns different numbers
 on identical resubmissions. **Nothing computed locally predicts its verdict**, so no
