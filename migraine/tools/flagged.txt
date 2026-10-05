@@ -1,0 +1,173 @@
+[p3] Word count: abstract 250 words; main text 6,069 words (excluding title page, abstract,
+[p3] headings, tables, figure legends, citation numbers and references).
+[p4] India carries a heavy share of that load. A community-based survey in Karnataka documented
+[p4] widespread headache-attributed disability, most of it borne without specialist care, and
+[p4] migraine accounted for a large part of the lost working time [3].
+[p4] For three decades the pharmacology trailed the biology. Triptans were designed as cranial
+[p4] vasoconstrictors and only later understood to act partly on trigeminal neurons; the classic
+[p4] preventives were borrowed from cardiology, epilepsy and psychiatry, and clinicians chose
+[p4] among them largely by which adverse effect a patient could tolerate. Calcitonin gene-related
+[p4] peptide (CGRP) broke that pattern. It moved from a peptide measured in cranial venous blood
+[p4] to a validated target, and four monoclonal antibodies plus a family of small-molecule receptor
+[p4] antagonists (the gepants) now occupy ground once held by propranolol and topiramate [4]. In
+[p4] 2024 the American Headache Society went further and endorsed CGRP-targeted therapy as a
+[p4] first-line preventive option [5].
+[p4] So the question has moved. Nobody now asks whether CGRP matters.
+[p5] Why, then, does blocking it leave so many patients where they started? In STRIVE, the
+[p5] erenumab registration trial, half of those on the higher dose failed to halve their monthly
+[p5] migraine days; among patients who had already failed two to four older preventives only 30%
+[p5] responded [6,7]. Something other than CGRP drives their attacks. Candidates exist (pituitary
+[p5] adenylate cyclase-activating polypeptide, ATP-sensitive potassium channels, amylin
+[p5] signalling, hypothalamic state change), but they are only now reaching human testing [8–10].
+[p5] Ayurveda enters the argument here, and it enters carrying a problem. Classical texts describe
+[p5] Ardhavabhedaka, a periodic, one-sided head pain that maps closely onto migraine, together
+[p5] with nasal, dietary, herbal and procedural treatments [11,12]. Indian patients use these
+[p5] treatments widely, frequently alongside conventional drugs and seldom with their neurologist's
+[p5] knowledge. What supports them, though, is a scatter of small trials and case series, padded out
+[p5] with single-compound pharmacology and rarely built around ICHD-3 diagnostic criteria or the
+[p5] outcome measures a headache specialist would accept [13,14].
+[p5] This review takes a deliberately critical line. We first reconstruct migraine as a disorder of
+[p5] brain state rather than of blood vessels, then examine where CGRP-era drugs succeed and
+[p5] where they stall. Only then do we test Ayurvedic claims, holding them to the same mechanistic
+[p5] and clinical standards. Reconciliation for its own sake is not the goal. We want to know which
+[p5] Ayurvedic interventions carry enough biological plausibility and human data to justify rigorous
+[p5] trials in exactly the patients modern pharmacology is failing.
+[p6] Was there a concurrent control, and was allocation
+[p6] blinded? Did outcomes follow International Headache Society trial guidance (monthly
+[p6] migraine days, 50% responder rate, two-hour pain freedom)? And did each arm exceed 50
+[p6] participants? Grades in Table 2 are therefore pragmatic judgements, not formal GRADE
+[p6] ratings.
+[p6] The premonitory phase and the hypothalamus
+[p6] Hours before the headache, sometimes a full day ahead, many patients yawn repeatedly, crave
+[p6] sweet food, feel neck stiffness, tire easily or start squinting at ordinary light [15,16]. A vascular
+[p6] theory cannot explain those symptoms. A hypothalamic one explains them without strain.
+[p6] Clinicians tend to think in attacks; patients live in cycles. Modern descriptions divide each
+[p6] episode into premonitory, aura, headache and postdrome phases, with aura present in roughly
+[p6] a third of patients, and the brain between attacks is not quiet either. Neurophysiological studies
+[p6] show reduced habituation to repeated sensory stimuli and altered thalamocortical processing in
+[p6] the interictal period [15,16]. Migraine, on this view, is a disorder of sensory gain whose set
+[p6] point drifts over days, and the attack is the moment the drift crosses a threshold. Triggers (a
+[p6] skipped meal, a lost night's sleep, a fall in oestrogen) then look less like causes and more like
+[p6] nudges applied to a system already close to its edge.
+[p6] Direct human evidence came from an unusual experiment. Schulte and May scanned one
+[p6] patient every day for 30 days. Three spontaneous attacks fell inside that window, and the scans
+[p6] showed hypothalamic activity rising in the 24 h before headache onset and coupling to the
+[p6] spinal trigeminal nuclei; once pain began, the coupling shifted to the dorsal rostral pons [17].
+[p9] Phase 2
+[p9] results measured over four weeks are fragile. Still, a two-day separation in precisely the
+[p9] population CGRP drugs serve worst is hard to dismiss.
+[p9] Downstream convergence on potassium channels
+[p9] CGRP and PACAP each raise intracellular cyclic AMP, and much of what follows converges
+[p9] on potassium channels in arterial smooth muscle. Levcromakalim, an opener of ATP-sensitive
+[p9] potassium (KATP) channels, triggered migraine attacks in all 16 patients who received it in a
+[p9] crossover provocation study [8]. No other human trigger comes close to that reliability.
+[p9] If opening KATP channels is sufficient to start an attack, closing them should help. The
+[p9] obstacle is chemistry. Glibenclamide and related sulfonylureas close KATP channels in
+[p9] pancreatic β-cells long before they reach useful vascular concentrations, and selective blockers
+[p9] of the vascular Kir6.1/SUR2B isoform have proven stubbornly hard to make.
+[p9] Genetics supports a mixed neuronal and vascular picture. A 2022 genome-wide meta-analysis
+[p9] of 102,084 cases identified 123 risk loci, with enrichment in vascular as well as central nervous
+[p9] system tissue; two loci contain genes encoding targets of approved drugs, CALCA/CALCB for
+[p9] CGRP and HTR1F for lasmiditan [26]. Common variants explain a small slice of heritability.
+[p9] None yet predicts who will respond to which drug.
+[p10] Central sensitisation in the trigeminocervical complex and thalamus underlies cutaneous allodynia, the stage
+[p10] at which peripherally acting drugs lose efficacy. Grey badges mark drug targets.
+[p10] Illustration prompt for Figure 1 (BioRender, Mind the Graph or a similar scientific illustration platform). Delete
+[p10] this box before submission.
+[p10] Create a publication-quality scientific illustration in a clean BioRender-style flat vector look on a pure white
+[p10] background, landscape, 180 mm wide x 120 mm high, 300 dpi, sans-serif labels (Arial, 8-10 pt), no photorealism, no
+[p10] decorative gradients, no text paragraphs inside the figure.
+[p12] That
+[p12] flexibility helps patients whose attack frequency fluctuates. Non-response becomes harder to
+[p12] read as well, because a drug taken at the wrong point in the cycle can fail for reasons unrelated
+[p12] to its target.
+[p12] Timing may matter more than molecule. Burstein and colleagues found that triptans rendered
+[p12] 93% of attacks pain-free when taken before cutaneous allodynia developed, and only 15% once
+[p12] it was established [38]. Allodynia marks the point at which central trigeminovascular neurons
+[p13] A drug given after that point is chasing a process
+[p13] it can no longer reach.
+[p13] In absolute terms the preventive trials make sobering reading. Erenumab 140 mg reduced
+[p13] monthly migraine days by 3.7 against 1.8 on placebo in STRIVE [6]; galcanezumab 120 mg
+[p13] by 4.7 against 2.8 in EVOLVE-1 [35]; intravenous eptinezumab 300 mg by 4.3 against 3.2 in
+[p13] PROMISE-1 [36]; oral atogepant 60 mg by 4.2 against 2.5 in ADVANCE [33]. In chronic
+[p13] migraine the placebo response swells. Fremanezumab given monthly cut headache days of at
+[p13] least moderate severity by 4.6 against 2.5 [23], atogepant 60 mg once daily reduced monthly
+[p13] migraine days by 6.9 against 5.1 in PROGRESS [34], and onabotulinumtoxinA, still the
+[p13] benchmark for chronic migraine, lowered headache days by 9.0 against 6.7 in PREEMPT 2
+[p13] Subtract placebo and the average gain shrinks to 1–2.5 days a month. Responder rates tell the
+[p13] same story from another angle. In STRIVE, 50.0% of patients on erenumab 140 mg halved
+[p13] their migraine days against 26.6% on placebo [6], which means roughly four patients must be
+[p13] treated for one to respond who would not have responded anyway; in LIBERTY the
+[p13] corresponding rates were 30% and 14% [7]. Those averages conceal wide individual variation.
+[p13] Some patients become almost attack-free; others notice nothing at all, and a mean drawn from
+[p13] that spread misleads enthusiasts and sceptics equally.
+[p13] Tolerability, persistence and access
+[p13] What CGRP-targeted drugs changed most was not efficacy but persistence. Older oral
+[p13] preventives were abandoned at striking rates: in a United States claims analysis of chronic
+[p13] migraine, only about a quarter of patients were still taking their first oral preventive six months
+[p13] after starting it, and fewer than one in five remained at one year [39]. Monthly or quarterly
+[p13] injections with few systemic adverse effects kept people on treatment. That tolerability profile,
+[p13] more than any leap in potency, underpins the 2024 American Headache Society position that
+[p13] CGRP-targeted drugs may be used first-line, without prior failure of older agents [5].
+[p13] For most patients in India the debate is largely theoretical. Cost and patchy availability keep
+[p13] antibodies and gepants out of reach for the majority, as they do across most low- and middle-
+[p13] income health systems [2,3]. Generic triptans, by contrast, are inexpensive in India, so getting
+[p13] them used properly in primary care is a cheaper first step than waiting for newer drugs to
+[p14] Whatever Ayurveda can or cannot offer, the access gap explains why so
+[p14] many patients try it.
+[p14] Why does blocking CGRP fail? At least five explanations compete; they overlap.
+[p14] The first is simply the wrong peptide. PACAP38 provokes attacks that CGRP blockade does
+[p14] not prevent [25], amylin acts through a receptor ligand antibodies leave untouched [9], and
+[p14] KATP opening sits downstream of both [8]. A patient whose attacks run mainly through one
+[p14] of these routes may never respond to a CGRP antibody, however long the trial of therapy.
+[p16] Suryavarta deserves a second look for a different reason. Its defining feature, pain that waxes
+[p16] with the rising sun and wanes by evening, echoes the circadian timing many patients describe,
+[p16] and the hypothalamus implicated in the premonitory phase also houses the body's master clock
+[p16] [12,15]. That parallel is suggestive, nothing more. It does, however, hand trialists a cheap
+[p16] stratification variable: record the clock time of onset.
+[p16] The treatment logic follows the pathology. If dry, mobile Vata is the driver, the correction is
+[p16] unctuous and warm: internal oleation with medicated ghee or oil, oil application to the head,
+[p16] and Nasya with oils the texts reserve for Vata-predominant head disorders [11,12]. Where
+[p16] Kapha participates, the emphasis moves toward evacuative Shirovirechana using pungent,
+[p16] drying drugs.
+[p20] Ginger (Shunthi): TRPV1 and a split verdict
+[p20] Gingerols, the pungent principles of Zingiber officinale, are agonists at TRPV1 (formerly
+[p20] VR1), with potency rising with alkyl chain length [44]. A TRPV1 agonist as a headache remedy
+[p20] sounds backwards, until one recalls that sustained agonism leaves the channel refractory, the
+[p20] principle behind topical capsaicin analgesia; on trigeminal C fibres, where TRPV1 and CGRP
+[p20] co-localise [27], desensitisation could in principle blunt CGRP release.
+[p20] Clinical data split cleanly by indication. As acute treatment, ginger powder matched
+[p20] sumatriptan across five consecutive attacks in a double-blind trial of 100 patients, with fewer
+[p20] adverse effects [45], and 400 mg of an extract containing 5% active ingredient, added to
+[p20] ketoprofen, improved pain relief at 1, 1.5 and 2 h in 60 patients [46].
+[p22] Rasa shastra products require heavy-metal testing before clinical use.
+[p22] Illustration prompt for Figure 2 (BioRender, Mind the Graph or a similar scientific illustration platform). Delete
+[p22] this box before submission.
+[p22] Create a clean, publication-quality concept map in BioRender-style flat vector graphics on a white background,
+[p22] landscape, 180 mm x 130 mm, 300 dpi, sans-serif labels (Arial 8-10 pt), no photorealism, no clip-art people. Title strip:
+[p22] 'Ardhavabhedaka and migraine: correspondence, candidate targets and evidence'.
+[p22] Colour each node border by strength of human evidence: green = Yoga and Shunthi (acute use); amber = Haridra, Tvak,
+[p22] Dhanyaka, Nasya; red = Shirodhara and Pathyadi decoction; grey = Ayush M-3. Add a small legend box at bottom right
+[p22] explaining the four border colours, and a small yellow warning-triangle icon beside the text 'Rasa shastra products:
+[p22] heavy-metal testing required'. Keep typography consistent, align all boxes on a grid and leave generous white space.
+[p22] Patients will not wait for better trials. Many already combine Ayurvedic remedies with
+[p22] conventional drugs, so what can a clinician say now? Yoga, taught by trained instructors and
+[p22] added to standard care, has randomised evidence behind it and few risks [57]. Ginger taken
+[p22] early in an attack is a reasonable adjunct for patients who want a non-drug option or cannot use
+[p22] triptans, provided expectations stay modest [45,47]; as a daily preventive it has failed [48].
+[p22] For turmeric, coriander and cinnamon the defensible position is agnostic: small positive trials,
+[p22] plausible mechanisms, no replication. Nasya and Shirodhara performed by trained practitioners
+[p22] look safe in the limited reports available. They remain unproven. Neither should displace a
+[p22] preventive that is working.
+[p22] Two cautions apply regardless. Products should come from manufacturers who test every batch
+[p22] for heavy metals (rasa shastra preparations above all) [60]. Patients juggling several acute
+[p23] One non-judgemental question about which Ayurvedic or herbal products a patient takes is the
+[p23] cheapest safety measure available: it catches contaminated preparations, duplicated analgesics
+[p23] and quietly abandoned preventives before they do harm.
+[p23] Critical appraisal and a research agenda
+[p23] Where does the evidence fail most often?
+[p23] Many Ayurvedic trials enrol by
+[p23] classical description alone, so their populations mix migraine with other primary and secondary
+[p23] headaches. Outcomes second: composite symptom scores devised for a single study cannot be
+[p23] compared with monthly migraine days or two-hour pain freedom, the outcomes International
+[p23] Headache Society guidance and every registration trial in Table 1 use.
