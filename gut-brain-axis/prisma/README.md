@@ -25,7 +25,8 @@ Two ways to unblock:
 
 | file | what it is |
 |---|---|
-| **`WORKSHEET.md`** | **start here.** Four queries to paste, ten numbers to write down, about fifteen minutes |
+| **`AUDIT_TRAIL.md`** | what a reviewer can demand as proof, what satisfies each request, what to capture at search time, and a drafted reply if they ask a narrative review for PRISMA |
+| **`WORKSHEET.md`** | four queries to paste, ten numbers to write down, about fifteen minutes |
 | `counts_minimal.json` | the short template the worksheet fills — ten numbers, no registers or automation fields |
 | `search_strategy.md` | the full version: six databases, two registers, the other-methods arm, with every string spelled out |
 | `counts.json` | the full template, if you ran the full search |
