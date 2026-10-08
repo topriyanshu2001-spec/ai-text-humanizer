@@ -51,6 +51,17 @@ python3 make_prisma.py
 Output lands in `out/`: vector **PDF, SVG and EPS**, plus **600 dpi PNG and LZW-compressed
 TIFF**. Journals want the vector; the rasters are for embedding previews.
 
+## Test renders mark themselves
+
+A flow diagram drawn from invented numbers looks exactly like one drawn from real numbers. That
+is a trap, so the script closes it: if the metadata still carries placeholder values — `TEST`,
+`n/a`, `TBD`, `synthetic`, a bare `-` — it stamps **SYNTHETIC DATA / NOT FOR PUBLICATION**
+diagonally across the figure and says on stderr which fields gave it away.
+
+`--draft` forces the stamp. Real metadata never triggers it.
+
+So a figure with no watermark is one you filled in yourself, from searches you ran.
+
 ## What the script refuses to do
 
 Both refusals are deliberate, and both are what a reviewer checks first.

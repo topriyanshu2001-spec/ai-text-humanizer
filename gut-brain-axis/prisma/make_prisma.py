@@ -65,6 +65,21 @@ def unfilled(node, trail="") -> list[str]:
     return out
 
 
+PLACEHOLDER_TOKENS = ("test", "synthetic", "n/a", "na", "tbd", "todo", "xxx",
+                      "placeholder", "example", "dummy", "sample", "-", "t")
+
+
+def looks_like_placeholder(meta: dict) -> list[str]:
+    """Metadata that betrays a test render rather than a real search."""
+    hits = []
+    for key in ("search_last_executed", "searchers", "screeners", "deduplication_tool"):
+        val = str(meta.get(key, "")).strip().lower()
+        if val in PLACEHOLDER_TOKENS or any(tok in val for tok in
+                                            ("test", "synthetic", "placeholder", "dummy")):
+            hits.append(f"{key}={meta.get(key)!r}")
+    return hits
+
+
 def total(section: dict) -> int:
     return sum(v for k, v in section.items() if not k.startswith("_"))
 
@@ -211,7 +226,7 @@ def phase(ax, y_top, y_bot, label):
             fontsize=PHASE_PT, family=FONT, color=INK)
 
 
-def render(f: Flow, c: dict, out: Path, stem: str, two_column: bool):
+def render(f: Flow, c: dict, out: Path, stem: str, two_column: bool, draft: bool = False):
     if two_column:
         fig_w, fig_h = 13.0, 9.6
         MX, MW, CH = 0.072, 0.252, 46     # main band (databases arm)
@@ -314,6 +329,11 @@ def render(f: Flow, c: dict, out: Path, stem: str, two_column: bool):
                 ha="left", va="center", fontsize=7.6, family=FONT,
                 color=INK, style="italic")
 
+    if draft:
+        ax.text(0.5, 0.55, "SYNTHETIC DATA\nNOT FOR PUBLICATION",
+                ha="center", va="center", rotation=28, fontsize=46, family=FONT,
+                color="#d22", alpha=0.26, weight="bold", linespacing=1.2, zorder=50)
+
     # Crop the canvas to the content. The Axes bbox is counted by bbox_inches="tight",
     # so without this a short flow leaves a band of dead white below the footer.
     # Rescaling the figure by the same factor keeps inches-per-axes-unit constant,
@@ -350,6 +370,8 @@ def main():
     ap.add_argument("--counts", default="counts.json", type=Path)
     ap.add_argument("--out", default="out", type=Path)
     ap.add_argument("--stem", default="Figure_S1_PRISMA_flow")
+    ap.add_argument("--draft", action="store_true",
+                    help="stamp SYNTHETIC DATA across the figure")
     ap.add_argument("--layout", choices=["two-column", "single", "auto"],
                     default="auto",
                     help="auto drops the other-methods arm when it is empty")
@@ -379,7 +401,16 @@ def main():
     layout = args.layout
     if layout == "auto":
         layout = "two-column" if f.other_identified > 0 else "single"
-    files = render(f, c, args.out, args.stem, layout == "two-column")
+    ph = looks_like_placeholder(c.get("meta", {}))
+    draft = args.draft or bool(ph)
+    if ph:
+        print("PLACEHOLDER METADATA DETECTED — stamping the figure as synthetic:",
+              file=sys.stderr)
+        for h in ph:
+            print(f"  {h}", file=sys.stderr)
+        print("  Replace these with the real search date and screener names.\n",
+              file=sys.stderr)
+    files = render(f, c, args.out, args.stem, layout == "two-column", draft)
 
     print("Flow reconciles:")
     print(f"  identified {f.identified:,}  (databases {f.db_total:,} + registers {f.reg_total:,})")
