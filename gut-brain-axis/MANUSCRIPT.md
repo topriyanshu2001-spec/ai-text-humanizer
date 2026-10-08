@@ -11,7 +11,7 @@
 
 **Corresponding author:** [Name, postal address, e-mail, ORCID]
 
-**Word count:** abstract 241 words; main text 5,894 words (excluding title page, abstract, headings, tables, figure legends, citation numbers and references). Tables: 4. Figures: 2 (plus Supplementary Figure S1). References: 106.
+**Word count:** abstract 241 words; main text 6,091 words (excluding title page, abstract, headings, tables, figure legends, citation numbers and references). Tables: 4. Figures: 2. References: 106.
 
 ---
 
@@ -47,11 +47,15 @@ The stakes are not academic. Depressive and anxiety disorders rose sharply durin
 
 This is a critical narrative review rather than a systematic one. We registered no protocol and make no claim to exhaustive retrieval; the synthesis is interpretive, and we have tried to mark where evidence is thin.
 
-We searched PubMed/MEDLINE, Scopus and Google Scholar across the circuit literature (*neuropod*, *enteroendocrine*, *enterochromaffin*, *vagal afferent*, *nodose*, *gut-brain circuit*), the compositional literature (*microbiota-gut-brain*, *psychobiotic*, *germ-free*, *faecal microbiota transplantation*) and the causal-inference literature applied to both (*Mendelian randomization*, *gut microbiome GWAS*). Reference lists of retrieved reviews were hand-searched. We gave priority to primary reports over commentary.
+We searched PubMed/MEDLINE, Scopus and Web of Science from inception to [MONTH YEAR]. Terms for the gut microbiota (*microbiota*, *microbiome*, Gastrointestinal Microbiome[MeSH]) were combined with terms for gut–brain communication and central outcomes (Brain-Gut Axis[MeSH], *gut-brain*, *brain-gut*, *depression*, *anxiety*, *behaviour*, *Parkinson*, *autism*), and the result crossed against two further blocks run in parallel. The first covered neuroepithelial and vagal transduction: Enteroendocrine Cells[MeSH], Enterochromaffin Cells[MeSH], *neuropod*, Vagus Nerve[MeSH], Nodose Ganglion[MeSH], *vagal afferent*, *vagotomy*, Toll-Like Receptor 5[MeSH], Optogenetics[MeSH], *sensory transduction*, Interoception[MeSH]. The second covered compositional and interventional evidence: Fecal Microbiota Transplantation[MeSH], Probiotics[MeSH], *psychobiotic*, *germ-free*, *gnotobiotic*, Mendelian Randomization Analysis[MeSH], *16S*, *metagenomic*, *short-chain fatty acid*.
 
-Search and selection are reported in the style of PRISMA 2020 as Supplementary Figure S1, with the full search strings for each database given in Supplementary File 1. We report the flow because a reader is entitled to see how the evidence base was assembled; we do not present the review as a systematic one, and it carries no protocol registration.
+Running both blocks matters for this review in particular. A search restricted to the first recovers the circuit literature and misses the compositional literature the paper criticises; a search restricted to the second does the reverse. The argument depends on holding both in view.
 
-> **[TO CONFIRM BEFORE SUBMISSION]** Exact search strings and the final search date must be recorded by the authors from a search they execute themselves, and the counts entered in `prisma/counts.json` so that Supplementary Figure S1 renders. Both are left for completion rather than asserted. Supplementary Figure S1 does not exist until those searches are run; the apparatus that draws it refuses to render placeholder numbers.
+We hand-searched the reference lists of retrieved reviews, and tracked forward citations of the principal circuit papers. Conference abstracts were excluded, as were commentaries and editorials without primary data, and reports with no neural or behavioural outcome. We read only English-language sources, which is a limitation recorded in Section 10. Within the included set we gave priority to primary reports over review articles, and to studies that manipulated a named component over those that reported an association. Before any source entered the reference list we checked it against the published record for retractions and expressions of concern.
+
+We did not pool data, assess risk of bias with a formal instrument, or rate certainty with GRADE, because the synthesis is interpretive rather than quantitative. Where we characterise a body of evidence as weak we say which feature makes it weak — heterogeneity, instrument strength, confounding, or absence of a specified mediating path — rather than assigning a summary grade.
+
+> **[TO COMPLETE BEFORE SUBMISSION]** Insert the month and year of the final search, and amend the list of databases to those you actually searched. If you also run the counts in `prisma/WORKSHEET.md`, add the sentence: "Search and selection are reported in the style of PRISMA 2020 as Supplementary Figure S1." That figure is optional for a narrative review and the Methods stand without it.
 
 ## 3. The compositional account and the state of its evidence
 

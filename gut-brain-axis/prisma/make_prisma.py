@@ -77,13 +77,13 @@ class Flow:
         self.errors: list[str] = []
 
         self.db_total = total(c["databases"])
-        self.reg_total = total(c["registers"])
+        self.reg_total = total(c.get("registers", {}))
         self.identified = self.db_total + self.reg_total
 
-        rb = c["removed_before_screening"]
-        self.dup = rb["duplicate_records"]
-        self.auto = rb["marked_ineligible_by_automation"]
-        self.other_removed = rb["removed_for_other_reasons"]
+        rb = c.get("removed_before_screening", {})
+        self.dup = rb.get("duplicate_records", 0)
+        self.auto = rb.get("marked_ineligible_by_automation", 0)
+        self.other_removed = rb.get("removed_for_other_reasons", 0)
         self.removed_before = self.dup + self.auto + self.other_removed
 
         self.screened = self._check(
@@ -117,17 +117,18 @@ class Flow:
         )
 
         # ---- other-methods arm
-        self.other_sources = {k: v for k, v in c["other_methods"].items()
+        self.other_sources = {k: v for k, v in c.get("other_methods", {}).items()
                               if not k.startswith("_")}
         self.other_identified = sum(self.other_sources.values())
-        self.other_not_retrieved = c["other_methods_screening"]["reports_not_retrieved"]
+        self.other_not_retrieved = c.get("other_methods_screening", {}).get("reports_not_retrieved", 0)
         self.other_assessed = self._check(
             self.other_identified - self.other_not_retrieved,
             "other-methods reports assessed = records identified − not retrieved",
             f"{self.other_identified} − {self.other_not_retrieved}",
         )
 
-        self.other_reasons = {k: v for k, v in c["other_methods_full_text_exclusions"].items()
+        self.other_reasons = {k: v for k, v in
+                              c.get("other_methods_full_text_exclusions", {}).items()
                               if not k.startswith("_")}
         self.other_ft_total = sum(self.other_reasons.values())
         self.included_other = self._check(
@@ -227,7 +228,7 @@ def render(f: Flow, c: dict, out: Path, stem: str, two_column: bool):
     ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
 
     db = [f"{k} (n = {v:,})" for k, v in c["databases"].items() if not k.startswith("_")]
-    reg = [f"{k} (n = {v:,})" for k, v in c["registers"].items() if not k.startswith("_")]
+    reg = [f"{k} (n = {v:,})" for k, v in c.get("registers", {}).items() if not k.startswith("_")]
 
     ax.text(MX, 0.982, "Identification of studies via databases and registers",
             ha="left", va="center", fontsize=PHASE_PT, family=FONT, color=INK)
@@ -313,6 +314,18 @@ def render(f: Flow, c: dict, out: Path, stem: str, two_column: bool):
                 ha="left", va="center", fontsize=7.6, family=FONT,
                 color=INK, style="italic")
 
+    # Crop the canvas to the content. The Axes bbox is counted by bbox_inches="tight",
+    # so without this a short flow leaves a band of dead white below the footer.
+    # Rescaling the figure by the same factor keeps inches-per-axes-unit constant,
+    # so box geometry and type size are unchanged.
+    bottom = foot_y - 0.055
+    if c["meta"].get("review_type") == "narrative":
+        bottom = foot_y - 0.085
+    bottom = max(0.0, min(bottom, 0.9))
+    span = 1.0 - bottom
+    ax.set_ylim(bottom, 1.0)
+    fig.set_size_inches(fig_w, fig_h * span)
+
     out.mkdir(parents=True, exist_ok=True)
     written = []
     for ext in ("pdf", "svg", "eps"):
@@ -337,9 +350,9 @@ def main():
     ap.add_argument("--counts", default="counts.json", type=Path)
     ap.add_argument("--out", default="out", type=Path)
     ap.add_argument("--stem", default="Figure_S1_PRISMA_flow")
-    ap.add_argument("--layout", choices=["two-column", "single"],
-                    default="two-column",
-                    help="two-column includes the other-methods arm")
+    ap.add_argument("--layout", choices=["two-column", "single", "auto"],
+                    default="auto",
+                    help="auto drops the other-methods arm when it is empty")
     args = ap.parse_args()
 
     c = load(args.counts)
@@ -363,7 +376,10 @@ def main():
         print("\nReviewers check this arithmetic first. Fix the inputs.", file=sys.stderr)
         sys.exit(3)
 
-    files = render(f, c, args.out, args.stem, args.layout == "two-column")
+    layout = args.layout
+    if layout == "auto":
+        layout = "two-column" if f.other_identified > 0 else "single"
+    files = render(f, c, args.out, args.stem, layout == "two-column")
 
     print("Flow reconciles:")
     print(f"  identified {f.identified:,}  (databases {f.db_total:,} + registers {f.reg_total:,})")

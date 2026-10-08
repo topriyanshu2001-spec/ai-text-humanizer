@@ -25,8 +25,10 @@ Two ways to unblock:
 
 | file | what it is |
 |---|---|
-| `search_strategy.md` | fully specified, reproducible search strings for six databases, two registers and the other-methods arm |
-| `counts.json` | the template you fill. Only independent counts; everything else is derived |
+| **`WORKSHEET.md`** | **start here.** Four queries to paste, ten numbers to write down, about fifteen minutes |
+| `counts_minimal.json` | the short template the worksheet fills — ten numbers, no registers or automation fields |
+| `search_strategy.md` | the full version: six databases, two registers, the other-methods arm, with every string spelled out |
+| `counts.json` | the full template, if you ran the full search |
 | `make_prisma.py` | validates the arithmetic, then renders the figure |
 | `screening_log_template.csv` | per-record screening log, so exclusion counts are auditable |
 
@@ -36,11 +38,14 @@ Two ways to unblock:
 pip install matplotlib pillow          # pillow is needed for the compressed TIFF
 cd gut-brain-axis/prisma
 
-# 1. run the searches in search_strategy.md, record what each returns
-# 2. fill counts.json
-# 3. render
+# short route: WORKSHEET.md -> counts_minimal.json
+python3 make_prisma.py --counts counts_minimal.json
+
+# full route: search_strategy.md -> counts.json
 python3 make_prisma.py
-python3 make_prisma.py --layout single      # databases/registers arm only
+
+# layout is chosen automatically: the other-methods arm is dropped when it is
+# empty. Force it either way with --layout two-column | single
 ```
 
 Output lands in `out/`: vector **PDF, SVG and EPS**, plus **600 dpi PNG and LZW-compressed
@@ -83,6 +88,17 @@ included via other      = other assessed − Σ other exclusion reasons
 studies included        = included via databases + included via other
 reports of included studies ≥ studies included
 ```
+
+## You may not need this figure at all
+
+A critical narrative review is not expected to carry a PRISMA flow diagram. The convention —
+the one the authors' own migraine review in this repository follows — is to report the search
+in prose: databases, term blocks, date range, exclusions, how quality was judged. Section 2 of
+the manuscript now does exactly that, and is complete once you insert the search date and
+confirm which databases you used.
+
+Treat this figure as polish. It adds transparency and some journals like it. It is not a
+requirement, and skipping it costs the manuscript nothing.
 
 ## Typeface
 

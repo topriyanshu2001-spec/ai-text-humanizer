@@ -1,0 +1,59 @@
+{
+  "_README": [
+    "The short version. Ten numbers, about fifteen minutes with WORKSHEET.md open.",
+    "Use this if you did not use registers or automation tools, which most narrative",
+    "reviews do not. Set citation searching to 0 if you did not do it, and the figure",
+    "drops the second arm automatically.",
+    "",
+    "Everything else is derived, so the figure cannot contradict itself."
+  ],
+
+  "meta": {
+    "review_title": "From composition to circuit: the neuroepithelial turn in microbiota-gut-brain research",
+    "review_type": "narrative",
+    "search_last_executed": null,
+    "searchers": null,
+    "screeners": null,
+    "deduplication_tool": null
+  },
+
+  "databases": {
+    "PubMed/MEDLINE": null,
+    "Embase": null,
+    "Scopus": null,
+    "Web of Science": null
+  },
+
+  "removed_before_screening": {
+    "duplicate_records": null,
+    "marked_ineligible_by_automation": 0,
+    "removed_for_other_reasons": 0
+  },
+
+  "screening": {
+    "records_excluded_at_title_abstract": null,
+    "reports_not_retrieved": null
+  },
+
+  "full_text_exclusions": {
+    "Not a gut-brain signalling study": null,
+    "No primary data (commentary, editorial, conference abstract)": null,
+    "No neural or behavioural outcome": null
+  },
+
+  "other_methods": {
+    "Citation searching (reference lists of retrieved reviews)": null
+  },
+
+  "other_methods_screening": {
+    "reports_not_retrieved": 0
+  },
+
+  "other_methods_full_text_exclusions": {
+    "Duplicate of a database record": null
+  },
+
+  "included": {
+    "reports_of_included_studies": null
+  }
+}
