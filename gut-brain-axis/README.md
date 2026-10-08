@@ -12,6 +12,7 @@ traditional-medicine content.
 | `SOURCES.md` | the five items still open before submission |
 | `Gut_Brain_References_v1.docx` | the reference list as Word |
 | `build_docx.py` | Markdown → .docx builder: Times New Roman throughout, every run black, double-spaced (never 1.5) |
+| `prisma/` | search strategy, counts template and a validating renderer for the PRISMA-style search-flow figure (Supplementary Figure S1) |
 
 ## Manuscript structure
 

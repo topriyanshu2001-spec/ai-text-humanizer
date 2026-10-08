@@ -1,0 +1,5 @@
+record_id,source_database,authors,year,title,journal,doi_or_pmid,stage_reached,decision,exclusion_reason,screener_1,screener_2,disagreement,notes
+1,PubMed/MEDLINE,,,,,,title_abstract,exclude,Not a gut-brain signalling study,,,no,
+2,PubMed/MEDLINE,,,,,,full_text,include,,,,no,
+3,Embase,,,,,,full_text,exclude,No primary data (commentary; editorial),,,yes,resolved by discussion
+4,Citation searching,,,,,,full_text,exclude,Duplicate of a database record,,,no,

@@ -11,7 +11,7 @@
 
 **Corresponding author:** [Name, postal address, e-mail, ORCID]
 
-**Word count:** abstract 241 words; main text 5,835 words (excluding title page, abstract, headings, tables, figure legends, citation numbers and references). Tables: 4. Figures: 2. References: 106.
+**Word count:** abstract 241 words; main text 5,894 words (excluding title page, abstract, headings, tables, figure legends, citation numbers and references). Tables: 4. Figures: 2 (plus Supplementary Figure S1). References: 106.
 
 ---
 
@@ -49,7 +49,9 @@ This is a critical narrative review rather than a systematic one. We registered 
 
 We searched PubMed/MEDLINE, Scopus and Google Scholar across the circuit literature (*neuropod*, *enteroendocrine*, *enterochromaffin*, *vagal afferent*, *nodose*, *gut-brain circuit*), the compositional literature (*microbiota-gut-brain*, *psychobiotic*, *germ-free*, *faecal microbiota transplantation*) and the causal-inference literature applied to both (*Mendelian randomization*, *gut microbiome GWAS*). Reference lists of retrieved reviews were hand-searched. We gave priority to primary reports over commentary.
 
-> **[TO CONFIRM BEFORE SUBMISSION]** Exact search strings and the final search date must be recorded by the authors from a search they execute themselves. These are left for completion rather than asserted.
+Search and selection are reported in the style of PRISMA 2020 as Supplementary Figure S1, with the full search strings for each database given in Supplementary File 1. We report the flow because a reader is entitled to see how the evidence base was assembled; we do not present the review as a systematic one, and it carries no protocol registration.
+
+> **[TO CONFIRM BEFORE SUBMISSION]** Exact search strings and the final search date must be recorded by the authors from a search they execute themselves, and the counts entered in `prisma/counts.json` so that Supplementary Figure S1 renders. Both are left for completion rather than asserted. Supplementary Figure S1 does not exist until those searches are run; the apparatus that draws it refuses to render placeholder numbers.
 
 ## 3. The compositional account and the state of its evidence
 

@@ -1,0 +1,74 @@
+{
+  "_README": [
+    "Fill every number from a search you actually ran. Nulls mean 'not yet run' and the",
+    "renderer will refuse to draw the figure until they are replaced.",
+    "",
+    "You supply only INDEPENDENT counts. Everything else (records screened, reports sought,",
+    "reports assessed, studies included) is DERIVED by make_prisma.py, so the arithmetic in",
+    "the figure cannot disagree with itself. If a derived value comes out negative, your",
+    "inputs are inconsistent and the script tells you which equation failed.",
+    "",
+    "Set a source to 0 if you did not use it. Do not delete keys."
+  ],
+
+  "meta": {
+    "review_title": "From composition to circuit: the neuroepithelial turn in microbiota-gut-brain research",
+    "review_type": "narrative",
+    "search_last_executed": null,
+    "searchers": null,
+    "screeners": null,
+    "deduplication_tool": null
+  },
+
+  "databases": {
+    "PubMed/MEDLINE": null,
+    "Embase": null,
+    "Scopus": null,
+    "Web of Science": null,
+    "PsycINFO": null,
+    "Cochrane CENTRAL": null
+  },
+
+  "registers": {
+    "ClinicalTrials.gov": null,
+    "PROSPERO": null
+  },
+
+  "removed_before_screening": {
+    "duplicate_records": null,
+    "marked_ineligible_by_automation": null,
+    "removed_for_other_reasons": null
+  },
+
+  "screening": {
+    "records_excluded_at_title_abstract": null,
+    "reports_not_retrieved": null
+  },
+
+  "full_text_exclusions": {
+    "Not a gut-brain signalling study": null,
+    "No primary data (commentary, editorial)": null,
+    "Wrong outcome (no neural or behavioural readout)": null,
+    "Conference abstract only": null,
+    "Not in English": null
+  },
+
+  "other_methods": {
+    "Citation searching (backward and forward)": null,
+    "Websites and organisations": null,
+    "Hand-searched journals": null
+  },
+
+  "other_methods_screening": {
+    "reports_not_retrieved": null
+  },
+
+  "other_methods_full_text_exclusions": {
+    "Duplicate of a database record": null,
+    "Wrong outcome": null
+  },
+
+  "included": {
+    "reports_of_included_studies": null
+  }
+}
