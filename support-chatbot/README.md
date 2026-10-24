@@ -14,10 +14,25 @@ Google Fonts; everything else is inline.
 
 | File | What it is |
 | --- | --- |
-| `index.html` | The page. Authored for the Artifact runtime, which supplies the document skeleton. |
-| `wrap.py` | Adds that skeleton so the page opens from the filesystem: `python3 wrap.py` → `standalone.html`. |
+| `index.html` | The source page. Authored for the Artifact runtime, which supplies the document skeleton. |
+| `saathi-support-chat.html` | The shareable build: one self-contained file. Generated — don't hand-edit it. |
+| `wrap.py` | Builds the shareable file from `index.html`: `python3 wrap.py`. |
 
-`standalone.html` is generated, so edit `index.html` and re-run the wrapper.
+Edit `index.html`, then re-run the wrapper.
+
+## Sharing it
+
+`saathi-support-chat.html` has no local dependencies, so it runs from a
+desktop, an email attachment, a USB stick or any static host. For a link in a
+slide deck:
+
+- **Static host** — GitHub Pages, a Netlify drop, S3, any web server. Upload
+  the single file and link its URL.
+- **Straight off disk** — open the file during the talk. Nothing to deploy,
+  and nothing to break on conference wifi.
+
+Its only network call fetches the three typefaces from Google Fonts. Offline,
+the layout is unchanged and the fallback system fonts take over.
 
 ## The scenario it was built around
 
