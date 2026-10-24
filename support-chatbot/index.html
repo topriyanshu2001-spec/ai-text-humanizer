@@ -1,6 +1,6 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>Saathi Support Chat</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,700&display=swap">
 <style>
 /* Layout: mock storefront page, support sheet docked bottom-right, full-screen sheet under 600px */
 :root{
@@ -29,9 +29,9 @@
   --on-ok:#ffffff;
   --head-hover:rgba(255,255,255,.18);
   --shadow:0 20px 46px -20px rgba(16,24,40,.38);
-  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
-  --body:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --display:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --body:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --page:#0f1520; --card:#172031; --sunk:#131b29; --ink:#eef2f8; --muted:#94a2b8; --line:#28344a;
@@ -65,12 +65,19 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--topbar);color:var(--topbar-ink)}
 .topbar-in{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:14px;padding-block:11px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.brand{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--topbar-ink)}
-.brand i{font-style:normal;color:var(--gold)}
+.brand{display:grid;gap:1px;font-family:var(--display);color:var(--topbar-ink);text-decoration:none;line-height:1.1}
+.word{font-style:italic;font-weight:700;font-size:21px;letter-spacing:-.01em}
+.brand i{font-style:italic;color:var(--gold)}
+.tagline{display:flex;align-items:center;gap:3px;font-style:italic;font-size:10.5px;white-space:nowrap}
+.tagline em{font-style:italic;color:var(--gold);font-weight:500}
+.tagline svg{color:var(--gold);flex:none}
 .search{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--topbar-field);color:var(--ink);border-radius:3px;padding:8px 10px}
 .search input{flex:1;min-width:0;border:0;background:none;color:inherit;font:inherit;outline:none}
-.search svg{flex:none;color:var(--muted)}
-.topnav{display:flex;gap:16px;align-items:center;font-size:13px;font-weight:600;color:var(--topbar-ink);opacity:.92}
+.search svg{flex:none;color:var(--accent)}
+.topnav{display:flex;gap:18px;align-items:center;font-size:14px;font-weight:500;color:var(--topbar-ink)}
+.login{background:var(--topbar-field);color:var(--accent);font-weight:700;padding:5px 26px;border-radius:2px}
+.cart{display:flex;align-items:center;gap:7px}
+@media (max-width:860px){.seller{display:none}}
 @media (max-width:620px){.search{display:none}.topnav{margin-left:auto}}
 
 .wrap{max-width:1060px;margin:0 auto;padding-block:20px 120px;
@@ -80,7 +87,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (min-width:1240px){body.chat-open .wrap{margin-left:auto;margin-right:430px}}
 
 .alert{display:flex;gap:12px;align-items:center;background:var(--warn-soft);border:1px solid var(--line);
-  border-left:4px solid var(--gold);border-radius:4px;padding:12px 14px;margin-bottom:22px}
+  border-left:4px solid var(--gold);border-radius:2px;padding:12px 14px;margin-bottom:18px}
 .alert-t{margin:0;font-weight:700;font-size:14px}
 .alert-s{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
 .alert-cta{margin-left:auto;flex:none;border:1px solid var(--accent);color:var(--accent);background:transparent;
@@ -90,22 +97,34 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 .product{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:30px;align-items:start}
 @media (max-width:780px){.product{grid-template-columns:minmax(0,1fr);gap:18px}}
-.shot{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px;display:grid;place-items:center}
+.left{display:grid;gap:10px;align-content:start}
+.shot{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:18px;display:grid;place-items:center}
 .shot svg{width:100%;max-width:100%;height:auto}
 .crumb{margin:0 0 6px;font-size:12px;color:var(--muted)}
-.info h1{font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.01em;max-width:34ch}
+.info h1{font-size:clamp(18px,2.2vw,22px);font-weight:400;max-width:40ch}
 .rate{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:13px;flex-wrap:wrap}
 .stars{background:var(--ok);color:var(--on-ok);font-weight:700;border-radius:4px;padding:2px 7px;font-size:12.5px}
 .assured{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
-.price{margin:12px 0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.price strong{font-family:var(--display);font-size:30px;font-weight:800;letter-spacing:-.02em}
+.rate-n{font-size:13px;font-weight:700;color:var(--muted)}
+.special{margin:16px 0 0;font-size:12px;font-weight:500;color:var(--ok)}
+.price{margin:3px 0 0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price strong{font-size:28px;font-weight:500}
 .price s{color:var(--muted)}
 .price em{font-style:normal;color:var(--ok);font-weight:700;font-size:14px}
 .facts{margin:16px 0;padding:0;list-style:none;display:grid;gap:8px;font-size:13.5px;max-width:52ch}
 .facts li{display:flex;gap:9px}
-.facts li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px}
-.buy{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.buy button{border:0;border-radius:3px;padding:13px 26px;font-weight:700;font-size:13.5px;letter-spacing:.03em;text-transform:uppercase}
+.facts li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--muted);margin-top:8px}
+.offers{margin:18px 0 0}
+.offers-h,.hl{margin:0 0 8px;font-size:15px;font-weight:500}
+.hl{margin-top:20px}
+.offers ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:13px;max-width:56ch}
+.offers li{display:flex;gap:9px}
+.offers li::before{content:"";flex:none;width:13px;height:13px;margin-top:2px;background:var(--gold);
+  clip-path:polygon(0 50%,38% 0,100% 0,100% 100%,38% 100%)}
+.offers b{font-weight:500}
+.buy{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.buy button{display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:2px;
+  padding:14px 10px;font-weight:500;font-size:14px;letter-spacing:.02em;text-transform:uppercase}
 .btn-cart{background:var(--gold);color:var(--gold-ink)}
 .btn-buy{background:var(--cta-buy);color:var(--cta-buy-ink)}
 .demo-note{margin:34px 0 0;font-size:12px;color:var(--muted);max-width:62ch}
@@ -210,12 +229,23 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 <header class="topbar">
   <div class="topbar-in">
-    <span class="brand">kart<i>ly</i></span>
+    <a class="brand" href="#">
+      <span class="word">kart<i>ly</i></span>
+      <span class="tagline">Explore <em>Plus</em>
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 2.9 6.3 6.8.8-5 4.6 1.3 6.8L12 17.2 5.9 20.5l1.3-6.8-5-4.6 6.8-.8Z"/></svg>
+      </span>
+    </a>
     <label class="search" for="store-search">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="store-search" placeholder="Search for earbuds, kurtas, kettles">
+      <input id="store-search" placeholder="Search for products, brands and more">
     </label>
-    <nav class="topnav"><span><b>Rahul</b></span><span>Cart · 0</span></nav>
+    <nav class="topnav">
+      <span class="login">Rahul</span>
+      <span class="seller">Become a Seller</span>
+      <span class="cart">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 4h2l2.3 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.3" fill="currentColor"/><circle cx="17" cy="20" r="1.3" fill="currentColor"/></svg>Cart
+      </span>
+    </nav>
   </div>
 </header>
 
@@ -229,6 +259,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 
   <section class="product">
+    <div class="left">
     <div class="shot">
       <svg viewBox="0 0 320 240" role="img" aria-label="Wireless earbuds with charging case">
         <rect x="0" y="0" width="320" height="240" fill="none"/>
@@ -250,25 +281,40 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
         <path d="M266 38c18 15 18 58 0 73" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" fill="none" opacity=".5"/>
       </svg>
     </div>
+      <div class="buy">
+        <button class="btn-cart">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 4h2l2.3 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H6"/></svg>Add to cart
+        </button>
+        <button class="btn-buy">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6Z"/></svg>Buy now
+        </button>
+      </div>
+    </div>
     <div class="info">
-      <p class="crumb">Electronics › Audio › True wireless</p>
+      <p class="crumb">Home › Electronics › Audio › True wireless</p>
       <h1>Acoustic Labs Z40 TWS Earbuds — 40 h playback, ENC mic</h1>
       <div class="rate">
         <span class="stars">4.2 ★</span>
-        <span class="muted">18,402 ratings · 1,106 reviews</span>
+        <span class="rate-n">18,402 Ratings &amp; 1,106 Reviews</span>
         <span class="assured">Verified</span>
       </div>
+      <p class="special">Special price</p>
       <p class="price"><strong class="mono">₹1,799</strong> <s class="mono">₹3,499</s> <em>49% off</em></p>
+      <div class="offers">
+        <p class="offers-h">Available offers</p>
+        <ul>
+          <li><b>Bank Offer</b> 10% off on HDFC Bank credit cards, up to ₹1,000</li>
+          <li><b>No cost EMI</b> from ₹600/month on orders above ₹1,500</li>
+          <li><b>Partner Offer</b> Sign up for Pay Later and get free delivery for a year</li>
+        </ul>
+      </div>
+      <p class="hl">Highlights</p>
       <ul class="facts">
         <li>Free delivery by <strong>Sat, 27 Oct</strong> to 560076</li>
         <li>7-day replacement only — this item is not returnable</li>
         <li>1-year warranty from Acoustic Labs</li>
         <li>Cash on delivery unavailable; UPI, card and netbanking accepted</li>
       </ul>
-      <div class="buy">
-        <button class="btn-cart">Add to cart</button>
-        <button class="btn-buy">Buy now</button>
-      </div>
     </div>
   </section>
 

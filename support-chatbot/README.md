@@ -23,7 +23,7 @@ Edit `index.html`, then re-run the wrapper.
 ## Sharing it
 
 The build is one file with everything inside it — markup, styles, script, and
-the three typefaces as base64. It makes no network calls at all, so it renders
+the typeface as base64. It makes no network calls at all, so it renders
 identically on a machine that has never opened it before, connected or not.
 
 **As a file.** Send it over WhatsApp, Slack or email as a document, or carry it
