@@ -1,4 +1,4 @@
-# Saathi — Bazaario support chat
+# Saathi — Kartly support chat
 
 Saathi is the support bot on a marketplace storefront: rule-based intent
 matching, quick-reply buttons, order and payment cards, and a handoff to a
