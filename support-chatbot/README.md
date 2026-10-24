@@ -22,17 +22,21 @@ Edit `index.html`, then re-run the wrapper.
 
 ## Sharing it
 
-`saathi-support-chat.html` has no local dependencies, so it runs from a
-desktop, an email attachment, a USB stick or any static host. For a link in a
-slide deck:
+The build is one file with everything inside it — markup, styles, script, and
+the three typefaces as base64. It makes no network calls at all, so it renders
+identically on a machine that has never opened it before, connected or not.
 
-- **Static host** — GitHub Pages, a Netlify drop, S3, any web server. Upload
-  the single file and link its URL.
-- **Straight off disk** — open the file during the talk. Nothing to deploy,
-  and nothing to break on conference wifi.
+**As a file.** Send it over WhatsApp, Slack or email as a document, or carry it
+on a USB stick. The recipient saves it and double-clicks; it opens in whatever
+browser they have. WhatsApp won't preview an HTML attachment — it downloads,
+which is exactly what you want when the target is a laptop.
 
-Its only network call fetches the three typefaces from Google Fonts. Offline,
-the layout is unchanged and the fallback system fonts take over.
+**As a link.** Put the file on any static host (GitHub Pages, a Netlify drop,
+S3) and share the URL. Links travel better than attachments in chat, since
+phones open them without a download step.
+
+`python3 wrap.py --no-fonts` builds a 40 KB version that pulls the typefaces
+from Google Fonts instead — smaller, but it needs a connection to look right.
 
 ## The scenario it was built around
 

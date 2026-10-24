@@ -66,6 +66,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 .wrap{max-width:1060px;margin:0 auto;padding-block:20px 120px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* on a wide enough screen, shift the storefront clear of the docked panel
+   rather than letting the panel sit over the product copy */
+@media (min-width:1240px){body.chat-open .wrap{margin-left:auto;margin-right:430px}}
 
 .alert{display:flex;gap:12px;align-items:center;background:var(--warn-soft);border:1px solid var(--line);
   border-left:4px solid var(--gold);border-radius:10px;padding:12px 14px;margin-bottom:22px}
@@ -739,10 +742,11 @@ $('#composer').addEventListener('submit', e => { e.preventDefault(); submit(inpu
 function openChat(prefill){
   chat.hidden = false;
   launcher.hidden = true;
+  document.body.classList.add('chat-open');
   if (prefill) submit(prefill);
   else if (window.innerWidth > 600) input.focus();
 }
-function closeChat(){ chat.hidden = true; launcher.hidden = false; }
+function closeChat(){ chat.hidden = true; launcher.hidden = false; document.body.classList.remove('chat-open'); }
 
 $('#minimise').addEventListener('click', closeChat);
 $('#launcher').addEventListener('click', () => openChat());
@@ -771,4 +775,5 @@ function boot(){
 }
 resetState();
 boot();
+document.body.classList.toggle('chat-open', !chat.hidden);
 </script>
