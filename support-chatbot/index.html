@@ -1,0 +1,773 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Bazaario Support Chat</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mock storefront page, support sheet docked bottom-right, full-screen sheet under 600px */
+:root{
+  --page:#f7f3f5;
+  --card:#ffffff;
+  --sunk:#fbf7f9;
+  --ink:#1a1119;
+  --muted:#6f6069;
+  --line:#e6dbe0;
+  --accent:#c2185b;
+  --accent-ink:#ffffff;
+  --accent-soft:#fbe7ef;
+  --gold:#d9930f;
+  --ok:#17794a;
+  --ok-soft:#e2f3ea;
+  --warn:#9a4a07;
+  --warn-soft:#fbeedd;
+  --bot:#f1eaee;
+  --sys:#ece5e9;
+  --on-ok:#ffffff;
+  --head-hover:rgba(255,255,255,.18);
+  --shadow:0 20px 46px -20px rgba(26,17,25,.42);
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --page:#130f16; --card:#1c161f; --sunk:#171220; --ink:#f4eef2; --muted:#a899a3; --line:#2f2733;
+  --accent:#ff7aa2; --accent-ink:#2a0a16; --accent-soft:#3a1b28; --gold:#f0bd5c;
+  --ok:#5fd39a; --ok-soft:#1d3b2d; --warn:#f0a868; --warn-soft:#3a2a1a;
+  --bot:#262030; --sys:#241e2b; --on-ok:#07160f; --head-hover:rgba(0,0,0,.16);
+  --shadow:0 20px 46px -20px rgba(0,0,0,.75);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --page:#130f16; --card:#1c161f; --sunk:#171220; --ink:#f4eef2; --muted:#a899a3; --line:#2f2733;
+  --accent:#ff7aa2; --accent-ink:#2a0a16; --accent-soft:#3a1b28; --gold:#f0bd5c;
+  --ok:#5fd39a; --ok-soft:#1d3b2d; --warn:#f0a868; --warn-soft:#3a2a1a;
+  --bot:#262030; --sys:#241e2b; --on-ok:#07160f; --head-hover:rgba(0,0,0,.16);
+  --shadow:0 20px 46px -20px rgba(0,0,0,.75);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+button{font:inherit;cursor:pointer}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+
+/* ---------- storefront chrome ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--card)}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:14px;padding-block:11px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--accent)}
+.brand i{font-style:normal;color:var(--gold)}
+.search{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.search input{flex:1;min-width:0;border:0;background:none;color:inherit;font:inherit;outline:none}
+.search svg{flex:none;color:var(--muted)}
+.topnav{display:flex;gap:16px;align-items:center;font-size:13px;font-weight:600;color:var(--muted)}
+.topnav b{color:var(--ink)}
+@media (max-width:620px){.search{display:none}.topnav{margin-left:auto}}
+
+.wrap{max-width:1060px;margin:0 auto;padding-block:20px 120px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+.alert{display:flex;gap:12px;align-items:center;background:var(--warn-soft);border:1px solid var(--line);
+  border-left:4px solid var(--gold);border-radius:10px;padding:12px 14px;margin-bottom:22px}
+.alert-t{margin:0;font-weight:700;font-size:14px}
+.alert-s{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.alert-cta{margin-left:auto;flex:none;border:1px solid var(--accent);color:var(--accent);background:transparent;
+  border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700}
+.alert-cta:hover{background:var(--accent-soft)}
+@media (max-width:560px){.alert{flex-wrap:wrap}.alert-cta{margin-left:0;width:100%}}
+
+.product{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:30px;align-items:start}
+@media (max-width:780px){.product{grid-template-columns:minmax(0,1fr);gap:18px}}
+.shot{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;place-items:center}
+.shot svg{width:100%;max-width:100%;height:auto}
+.crumb{margin:0 0 6px;font-size:12px;color:var(--muted)}
+.info h1{font-size:clamp(19px,2.4vw,24px);font-weight:600;letter-spacing:-.01em;max-width:34ch}
+.rate{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:13px;flex-wrap:wrap}
+.stars{background:var(--ok);color:var(--on-ok);font-weight:700;border-radius:4px;padding:2px 7px;font-size:12.5px}
+.assured{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.price{margin:12px 0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price strong{font-family:var(--display);font-size:30px;font-weight:800;letter-spacing:-.02em}
+.price s{color:var(--muted)}
+.price em{font-style:normal;color:var(--ok);font-weight:700;font-size:14px}
+.facts{margin:16px 0;padding:0;list-style:none;display:grid;gap:8px;font-size:13.5px;max-width:52ch}
+.facts li{display:flex;gap:9px}
+.facts li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px}
+.buy{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.buy button{border-radius:8px;padding:12px 24px;font-weight:700;font-size:14px;border:1px solid var(--accent)}
+.btn-cart{background:transparent;color:var(--accent)}
+.btn-buy{background:var(--accent);color:var(--accent-ink)}
+.demo-note{margin:34px 0 0;font-size:12px;color:var(--muted);max-width:62ch}
+
+/* ---------- launcher ---------- */
+.launcher{position:fixed;z-index:39;border:0;border-radius:999px;background:var(--accent);color:var(--accent-ink);
+  right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  display:flex;align-items:center;gap:9px;padding:13px 20px;font-weight:700;box-shadow:var(--shadow)}
+.launcher .badge{background:var(--card);color:var(--accent);border-radius:999px;font-size:11px;padding:1px 7px}
+
+/* ---------- chat sheet ---------- */
+.chat{position:fixed;z-index:40;display:flex;flex-direction:column;overflow:hidden;
+  right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  width:390px;max-width:calc(100vw - 32px);height:min(640px,calc(100vh - 110px));
+  background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+@media (max-width:600px){.chat{inset:0;width:auto;max-width:none;height:auto;border:0;border-radius:0;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}}
+
+.chat-head{display:flex;align-items:center;gap:10px;padding:11px 12px;background:var(--accent);color:var(--accent-ink)}
+.ava{flex:none;width:34px;height:34px;border-radius:50%;background:var(--card);color:var(--accent);display:grid;place-items:center}
+.who{flex:1;min-width:0}
+.who .name{margin:0;font-family:var(--display);font-weight:600;font-size:15px}
+.who .stat{margin:0;font-size:11.5px;opacity:.85;display:flex;align-items:center;gap:5px}
+.live{width:6px;height:6px;border-radius:50%;background:#49d17f;flex:none}
+.icon-btn{flex:none;width:30px;height:30px;border:0;border-radius:8px;background:transparent;color:inherit;display:grid;place-items:center;opacity:.9}
+.icon-btn:hover{background:var(--head-hover);opacity:1}
+
+.log{flex:1;min-height:0;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:9px;background:var(--sunk)}
+.row{display:flex;gap:7px;align-items:flex-end}
+.row.user{justify-content:flex-end}
+.mini{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.mini.blank{background:none}
+.m{max-width:85%;padding:9px 12px;border-radius:14px;font-size:14px;overflow-wrap:break-word}
+.m.bot{background:var(--bot);border-bottom-left-radius:4px}
+.m.user{background:var(--accent);color:var(--accent-ink);border-bottom-right-radius:4px}
+.m.agent{background:var(--card);border:1px solid var(--accent);border-bottom-left-radius:4px}
+.m p{margin:0 0 7px}
+.m p:last-child{margin:0}
+.t{display:block;margin-top:5px;font-size:10.5px;opacity:.6;font-variant-numeric:tabular-nums}
+.tag{display:block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.sys{align-self:center;max-width:90%;text-align:center;background:var(--sys);color:var(--muted);
+  font-size:12px;padding:6px 13px;border-radius:999px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px;margin-top:9px}
+.m.agent .card{background:var(--sunk)}
+.card-k{margin:0 0 8px;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.card-row{display:flex;gap:10px;align-items:center}
+.thumb{flex:none;width:42px;height:42px;border-radius:8px;background:var(--sunk);border:1px solid var(--line);display:grid;place-items:center}
+.card-t{margin:0;font-weight:600;font-size:13px;line-height:1.35}
+.card-s{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.kv{margin:0;display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:12.5px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;text-align:right;font-weight:600}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.track{list-style:none;margin:10px 0 0;padding:0 0 0 18px;position:relative;font-size:12.5px;display:grid;gap:9px}
+.track::before{content:"";position:absolute;left:4px;top:7px;bottom:7px;width:2px;background:var(--line)}
+.track li{position:relative;display:flex;justify-content:space-between;gap:10px;color:var(--muted)}
+.track li::before{content:"";position:absolute;left:-18px;top:5px;width:10px;height:10px;border-radius:50%;
+  background:var(--card);border:2px solid var(--line)}
+.track li.done{color:var(--ink)}
+.track li.done::before{background:var(--ok);border-color:var(--ok)}
+.track li.now{color:var(--ink);font-weight:600}
+.track li.now::before{background:var(--gold);border-color:var(--gold)}
+.track em{font-style:normal;flex:none;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.dots{display:flex;gap:4px;padding:4px 2px}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--muted);opacity:.45}
+@media (prefers-reduced-motion:no-preference){
+  .dots i{animation:bob .9s infinite ease-in-out}
+  .dots i:nth-child(2){animation-delay:.15s}
+  .dots i:nth-child(3){animation-delay:.3s}
+  .row,.sys{animation:rise .18s ease-out}
+}
+@keyframes bob{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-4px);opacity:.9}}
+@keyframes rise{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;padding:10px 12px 0;background:var(--card)}
+.chips:empty{display:none}
+.chip{border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;
+  padding:7px 13px;font-size:13px;font-weight:600}
+.chip:hover{background:var(--accent-soft)}
+.chip.primary{background:var(--accent);color:var(--accent-ink)}
+
+.composer{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-top:1px solid var(--line)}
+.composer input{flex:1;min-width:0;border:1px solid var(--line);background:var(--sunk);color:inherit;
+  border-radius:999px;padding:11px 14px;font:inherit;font-size:14px;outline:none}
+.composer input:focus-visible{border-color:var(--accent)}
+.send{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.send:disabled{opacity:.45;cursor:not-allowed}
+.fine{margin:0;padding:0 12px 9px;font-size:10.5px;color:var(--muted);text-align:center;background:var(--card)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <span class="brand">bazaar<i>io</i></span>
+    <label class="search" for="store-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="store-search" placeholder="Search for earbuds, kurtas, kettles">
+    </label>
+    <nav class="topnav"><span><b>Rahul</b></span><span>Cart · 0</span></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="alert">
+    <div>
+      <p class="alert-t">₹1,799 debited · we haven't confirmed your order yet</p>
+      <p class="alert-s">Order <span class="mono">OD118294750362</span> · placed today, 11:02 am</p>
+    </div>
+    <button class="alert-cta" id="alert-help">Get help</button>
+  </div>
+
+  <section class="product">
+    <div class="shot">
+      <svg viewBox="0 0 320 240" role="img" aria-label="Wireless earbuds with charging case">
+        <rect x="0" y="0" width="320" height="240" fill="none"/>
+        <ellipse cx="160" cy="214" rx="104" ry="13" fill="var(--sunk)"/>
+        <rect x="96" y="120" width="128" height="86" rx="20" fill="var(--ink)"/>
+        <rect x="96" y="120" width="128" height="20" rx="10" fill="var(--muted)"/>
+        <circle cx="160" cy="176" r="7" fill="var(--accent)"/>
+        <g>
+          <circle cx="104" cy="74" r="30" fill="var(--ink)"/>
+          <circle cx="104" cy="74" r="13" fill="var(--sunk)"/>
+          <path d="M100 100c-3 18-1 30 6 38" stroke="var(--ink)" stroke-width="15" stroke-linecap="round" fill="none"/>
+        </g>
+        <g>
+          <circle cx="212" cy="74" r="30" fill="var(--ink)"/>
+          <circle cx="212" cy="74" r="13" fill="var(--sunk)"/>
+          <path d="M216 100c3 18 1 30-6 38" stroke="var(--ink)" stroke-width="15" stroke-linecap="round" fill="none"/>
+        </g>
+        <path d="M250 50c10 8 10 26 0 34" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M266 38c18 15 18 58 0 73" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" fill="none" opacity=".5"/>
+      </svg>
+    </div>
+    <div class="info">
+      <p class="crumb">Electronics › Audio › True wireless</p>
+      <h1>Acoustic Labs Z40 TWS Earbuds — 40 h playback, ENC mic</h1>
+      <div class="rate">
+        <span class="stars">4.2 ★</span>
+        <span class="muted">18,402 ratings · 1,106 reviews</span>
+        <span class="assured">Assured</span>
+      </div>
+      <p class="price"><strong class="mono">₹1,799</strong> <s class="mono">₹3,499</s> <em>49% off</em></p>
+      <ul class="facts">
+        <li>Free delivery by <strong>Sat, 27 Oct</strong> to 560076</li>
+        <li>7-day replacement only — this item is not returnable</li>
+        <li>1-year warranty from Acoustic Labs</li>
+        <li>Cash on delivery unavailable; UPI, card and netbanking accepted</li>
+      </ul>
+      <div class="buy">
+        <button class="btn-cart">Add to cart</button>
+        <button class="btn-buy">Buy now</button>
+      </div>
+    </div>
+  </section>
+
+  <p class="demo-note">A demo storefront built to show the support chat in context. The order, the ₹1,799 debit and the specialist handoff are all simulated — nothing here charges anyone or reaches a real support desk.</p>
+</main>
+
+<button class="launcher" id="launcher" hidden>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H8l-5 3 1.4-4.2A8 8 0 1 1 21 12Z"/></svg>
+  Need help?
+</button>
+
+<section class="chat" id="chat" aria-label="Bazaario support chat">
+  <header class="chat-head">
+    <span class="ava" aria-hidden="true">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="4"/><circle cx="9" cy="14" r="1.4" fill="currentColor"/><circle cx="15" cy="14" r="1.4" fill="currentColor"/><path d="M12 8V4M9.5 4h5"/></svg>
+    </span>
+    <div class="who">
+      <p class="name" id="who-name">Bazaario Assistant</p>
+      <p class="stat" id="who-stat"><span class="live"></span>Replies instantly · 24×7</p>
+    </div>
+    <button class="icon-btn" id="to-human" title="Talk to a person" aria-label="Talk to a person">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.2-4 3.7-5.6 7-5.6s5.8 1.6 7 5.6"/></svg>
+    </button>
+    <button class="icon-btn" id="restart" title="Start over" aria-label="Start the conversation over">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 0 2.5-5.8"/><path d="M4 4v4h4"/></svg>
+    </button>
+    <button class="icon-btn" id="minimise" title="Minimise" aria-label="Minimise chat">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </header>
+
+  <div class="log" id="log" role="log" aria-live="polite" aria-label="Conversation"></div>
+  <div class="chips" id="chips"></div>
+
+  <form class="composer" id="composer">
+    <input id="msg" autocomplete="off" placeholder="Type your question…" aria-label="Type your message">
+    <button class="send" type="submit" aria-label="Send message">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+    </button>
+  </form>
+  <p class="fine">Simulated support bot · no real orders or payments</p>
+</section>
+
+<script>
+/* ------------------------------------------------------------------ *
+ * Bazaario support chat
+ * Rule-based intent matching, quick replies, and a two-strike
+ * handoff to a human specialist.
+ * ------------------------------------------------------------------ */
+const $ = sel => document.querySelector(sel);
+const log = $('#log'), chipRow = $('#chips'), input = $('#msg');
+const chat = $('#chat'), launcher = $('#launcher');
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const clock = () => new Date().toLocaleTimeString('en-IN', {hour:'numeric', minute:'2-digit'}).toLowerCase();
+
+/* ---------- mock account data ---------- */
+const CUSTOMER = 'Rahul';
+const ORDER = {
+  id:'OD118294750362',
+  item:'Acoustic Labs Z40 TWS Earbuds',
+  qty:1, amount:'₹1,799', placed:'today, 11:02 am', eta:'Sat, 27 Oct',
+  payment:{mode:'UPI · HDFC ••4417', ref:'UPI/428831904477', at:'today, 11:02 am'}
+};
+const PAST_ORDER = {id:'OD117440291835', item:'Handloom cotton kurta (M)', amount:'₹899', delivered:'18 Oct', replaceTill:'25 Oct'};
+
+const BUD = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M8 12c-1 5 0 7 2 8"/><circle cx="17" cy="8" r="4"/><path d="M18 12c1 5 0 7-2 8"/></svg>';
+
+const orderCard = () => `
+  <div class="card">
+    <p class="card-k">Order <span class="mono">${ORDER.id}</span></p>
+    <div class="card-row">
+      <span class="thumb">${BUD}</span>
+      <div>
+        <p class="card-t">${ORDER.item}</p>
+        <p class="card-s">Qty ${ORDER.qty} · <span class="mono">${ORDER.amount}</span> · placed ${ORDER.placed}</p>
+      </div>
+    </div>
+    <ol class="track">
+      <li class="done"><span>Order placed</span><em>11:02 am</em></li>
+      <li class="now"><span>Payment confirmation</span><em>With HDFC Bank</em></li>
+      <li><span>Packed</span><em>—</em></li>
+      <li><span>Out for delivery</span><em>—</em></li>
+      <li><span>Delivered</span><em>Expected ${ORDER.eta}</em></li>
+    </ol>
+  </div>`;
+
+const paymentCard = () => `
+  <div class="card">
+    <p class="card-k">Payment on this order</p>
+    <dl class="kv">
+      <dt>Amount debited</dt><dd class="mono">${ORDER.amount}</dd>
+      <dt>Method</dt><dd>${ORDER.payment.mode}</dd>
+      <dt>Bank reference</dt><dd class="mono">${ORDER.payment.ref}</dd>
+      <dt>Debited at</dt><dd>${ORDER.payment.at}</dd>
+      <dt>Status</dt><dd><span class="pill warn">Awaiting bank confirmation</span></dd>
+    </dl>
+  </div>`;
+
+const refundCard = id => `
+  <div class="card">
+    <p class="card-k">Auto-refund watch</p>
+    <dl class="kv">
+      <dt>Trace reference</dt><dd class="mono">${id}</dd>
+      <dt>Amount</dt><dd class="mono">${ORDER.amount}</dd>
+      <dt>Refunds to</dt><dd>${ORDER.payment.mode}</dd>
+      <dt>If unconfirmed</dt><dd>3–5 business days</dd>
+      <dt>Status</dt><dd><span class="pill ok">Monitoring</span></dd>
+    </dl>
+  </div>`;
+
+/* ---------- conversation state ---------- */
+let S = {};
+const resetState = () => { S = {misses:0, handoff:false, turns:0, trace:null, lastWho:null, agentTurn:0}; };
+
+/* ---------- quick replies ---------- */
+const chip = (label, go, primary) => ({label, go, primary});
+const HOME = [
+  chip('My money was deducted', null, true),
+  chip('Where is my order?', 'track'),
+  chip('Return an item', 'return_replace')
+];
+/* the first chip types Rahul's whole sentence for him */
+HOME[0].send = 'My money has been deducted, but I have not received my order confirmation.';
+const RESOLVE = [chip('That solved it', 'solved'), chip('Still stuck', 'stuck')];
+const HUMAN = chip('Talk to a specialist', 'handoff', true);
+
+/* ---------- intents ---------- *
+ * keys are [substring, weight] pairs matched against space-padded,
+ * punctuation-stripped text. Hinglish phrasings carry the same weight
+ * as English ones — most of these arrive half-typed in either.       */
+const INTENTS = [
+  {id:'agent', keys:[['talk to a human',5],['talk to human',5],['human',4],['agent',4],['representative',4],
+    ['real person',4],['customer care',4],['customer service',3],['executive',3],['supervisor',4],
+    ['talk to someone',4],['speak to',3],['connect me',3],['escalate',3],['complaint',2],['kisi se baat',4]]},
+
+  {id:'payment_deducted', keys:[['money has been deducted',4],['money deducted',4],['amount deducted',4],
+    ['payment deducted',4],['money is deducted',4],['deducted',2],['debited',2],['debit',1],['charged',2],
+    ['paisa',2],['paise',2],['kat gaya',3],['cut from my account',4],['money',1],['payment failed',3],
+    ['failed payment',3],['transaction failed',3]]},
+
+  {id:'track', keys:[['where is my order',4],['where is my parcel',4],['track',3],['tracking',3],['shipment',3],
+    ['courier',3],['out for delivery',4],['delivery date',3],['delivery',2],['delayed',3],['delay',3],
+    ['late',2],['kab aayega',4],['kahan hai',4],['kab tak',3],['eta',2]]},
+
+  {id:'refund_status', keys:[['refund',3],['money back',3],['reversal',3],['reversed',2],['wapas',2],
+    ['when will i get my money',4],['credited back',3]]},
+
+  {id:'payment_help', keys:[['payment help',4],['payment support',4],['payment',2],['upi',3],['bank',2],
+    ['transaction',2],['txn',2],['netbanking',3],['card',2],['statement',2],['reference number',3]]},
+
+  {id:'check_order', keys:[['check my order',4],['check order',3],['order status',4],['status of my order',4],
+    ['my orders',3],['orders section',3],['my order',2],['confirmation',2],['not confirmed',3],
+    ['no confirmation',3],['order confirm',3],['order',1],['status',1]]},
+
+  {id:'cancel', keys:[['cancel',3],['dont want this',3],['do not want',2],['cancel kar',4]]},
+
+  {id:'return_replace', keys:[['return',3],['replace',3],['replacement',3],['exchange',3],['defective',3],
+    ['damaged',3],['wrong item',3],['wrong product',3],['not working',2],['broken',2],['faulty',3]]},
+
+  {id:'invoice', keys:[['invoice',3],['gst',3],['receipt',2],['bill',2]]},
+
+  {id:'address', keys:[['change address',4],['wrong address',4],['address',2],['pincode',3],['pin code',3]]},
+
+  {id:'greet', keys:[[' hi ',3],[' hey ',3],['hello',3],['namaste',3],['good morning',3],['good evening',3]]},
+
+  {id:'thanks', keys:[['thank',3],['thanks',3],['shukriya',3],['dhanyavad',3],[' ty ',2]]},
+
+  {id:'bye', keys:[['bye',3],['goodbye',3],['that is all',3],['thats all',3],['nothing else',3],['no thanks',3]]}
+];
+
+const norm = t => ' ' + t.toLowerCase().replace(/[^a-z0-9₹]+/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+
+/* The signature case: a debit with no confirmation. Either half alone is
+   ambiguous, so the pair gets a decisive boost. */
+const DEBIT = /deduct|debit|charg|kat gaya|paisa|paise|cut from|money gone/;
+const MISSING = /no confirm|not confirm|without confirm|havent received|have not received|not received|didnt get|did not get|no sms|no email|no order|nothing/;
+
+function detect(text){
+  const t = norm(text);
+  let best = null, top = 0;
+  for (const intent of INTENTS){
+    let score = 0;
+    for (const [kw, w] of intent.keys) if (t.includes(kw)) score += w;
+    if (intent.id === 'payment_deducted' && DEBIT.test(t) && MISSING.test(t)) score += 6;
+    if (score > top){ top = score; best = intent; }
+  }
+  return top >= 2 ? best.id : null;
+}
+
+/* ---------- flows ---------- */
+const FLOWS = {
+  greet: () => ({lines:[
+    `Hi ${CUSTOMER}. I handle orders, payments, refunds and returns.`,
+    `There's one order on your account waiting on payment confirmation. What can I sort out?`
+  ], chips: HOME}),
+
+  /* The scripted reply for the deducted-money case, with the two
+     quick replies that save Rahul a paragraph of typing. */
+  payment_deducted: () => ({lines:[
+    `I understand your concern. Please check your Orders section for the latest status. Would you like help checking your order or finding payment support?`
+  ], chips:[chip('Check Order','check_order', true), chip('Payment Help','payment_help', true)]}),
+
+  check_order: () => ({lines:[
+    `Here's what your account shows right now.${orderCard()}`,
+    `Your ${ORDER.amount} reached us at 11:02 am and the order is held at payment confirmation. That's why no confirmation SMS has gone out — we don't send one until the bank confirms the debit.`
+  ], chips:[chip('Payment Help','payment_help'), chip('Where is my order?','track'), HUMAN]}),
+
+  payment_help: () => {
+    S.trace = S.trace || 'PT-' + Math.floor(72000 + Math.random()*8000);
+    return {lines:[
+      `Pulling up the payment side.${paymentCard()}`,
+      `Two things can happen from here. If HDFC confirms within 24 hours, your order moves to packing and the confirmation lands by SMS and email. If it doesn't confirm, the ${ORDER.amount} returns to the same account in 3–5 business days — automatically, no request needed.`,
+      `I've opened trace <span class="mono">${S.trace}</span> so this doesn't sit unwatched.${refundCard(S.trace)}`
+    ], chips:[chip('Refund status','refund_status'), ...RESOLVE]};
+  },
+
+  refund_status: () => ({lines:[
+    S.trace
+      ? `Trace <span class="mono">${S.trace}</span> is open and the ${ORDER.amount} is being monitored. Nothing has reversed yet — the bank is still inside its 24-hour confirmation window.`
+      : `No refund is in progress yet, because the order hasn't failed. The ${ORDER.amount} is sitting with HDFC awaiting confirmation; if that confirmation doesn't arrive, the amount reverses on its own within 3–5 business days.`,
+    `Refunds go back to the source — ${ORDER.payment.mode} — never to wallet credit unless you ask for it.`
+  ], chips:[chip('Keep it with the bank','payment_help'), ...RESOLVE]}),
+
+  track: () => ({lines:[
+    `Tracking doesn't start until payment clears, so there's no courier leg yet.${orderCard()}`,
+    `The ${ORDER.eta} date still holds if the bank confirms today. Slip past tonight and the date moves, and I'll tell you here rather than letting you find out from the app.`
+  ], chips:[chip('Payment Help','payment_help'), chip('Change delivery address','address'), ...RESOLVE]}),
+
+  cancel: () => ({lines:[
+    `I can cancel <span class="mono">${ORDER.id}</span>, and since it hasn't been packed there's no cancellation fee. The ${ORDER.amount} refunds to ${ORDER.payment.mode}.`,
+    `One catch worth knowing: the bank hasn't confirmed this payment yet. Cancelling now puts the refund behind that confirmation and adds a day or two. Still want it cancelled?`
+  ], chips:[chip('Yes, cancel it','cancel_yes', true), chip('No, keep the order','check_order')]}),
+
+  cancel_yes: () => {
+    S.misses = 0;
+    return {lines:[
+      `Done — <span class="mono">${ORDER.id}</span> is cancelled and the refund is queued against ${ORDER.payment.mode}.`,
+      `You'll get an SMS when the bank releases it, usually 3–5 business days.`
+    ], chips:[chip('Something else','home'), chip('End chat','bye')]};
+  },
+
+  return_replace: () => ({lines:[
+    `The earbuds haven't shipped, so there's nothing to return there. Your delivered order is this one:`,
+    `<div class="card"><p class="card-k">Order <span class="mono">${PAST_ORDER.id}</span></p>
+      <p class="card-t">${PAST_ORDER.item}</p>
+      <p class="card-s">${PAST_ORDER.amount} · delivered ${PAST_ORDER.delivered} · replacement window open till <strong>${PAST_ORDER.replaceTill}</strong></p></div>`,
+    `Tell me what's wrong with it — size, damage, or a wrong item — and I'll book the pickup.`
+  ], chips:[chip('Wrong size','return_reason'), chip('Damaged','return_reason'), HUMAN]}),
+
+  return_reason: () => {
+    S.misses = 0;
+    return {lines:[
+      `Pickup booked for <span class="mono">${PAST_ORDER.id}</span> between 10 am and 7 pm tomorrow. Keep the item in its original packing with the tag on.`,
+      `Replacement ships the day the pickup is scanned.`
+    ], chips:[chip('Something else','home'), chip('End chat','bye')]};
+  },
+
+  invoice: () => ({lines:[
+    `Invoices are generated once an order is confirmed, so <span class="mono">${ORDER.id}</span> doesn't have one yet.`,
+    `For <span class="mono">${PAST_ORDER.id}</span> the tax invoice is already on your Orders page under Download invoice. Need GST details added to a past invoice? A specialist has to re-issue it.`
+  ], chips:[HUMAN, ...RESOLVE]}),
+
+  address: () => ({lines:[
+    `The delivery address can still be changed — nothing has been packed.`,
+    `Current address on this order: <strong>${CUSTOMER} · 560076, Bengaluru</strong>. Addresses change from Orders → the order → Change address, and the pincode has to be serviceable for this seller.`
+  ], chips:[chip('Where is my order?','track'), ...RESOLVE]}),
+
+  thanks: () => ({lines:[`Happy to help, ${CUSTOMER}.`], chips:[chip('Something else','home'), chip('End chat','bye')]}),
+
+  bye: () => ({lines:[
+    `Closing this chat. The trace on your payment stays open either way, and any update reaches you by SMS.`
+  ], chips:[chip('Start a new chat','home')]}),
+
+  solved: () => {
+    S.misses = 0;
+    return {lines:[`Good — I'll mark this resolved.`], chips:[chip('Something else','home'), chip('End chat','bye')]};
+  },
+
+  home: () => ({lines:[`What else can I look at?`], chips: HOME})
+};
+
+/* ---------- rendering ---------- */
+function bubble(who, html, tag){
+  const row = document.createElement('div');
+  row.className = 'row ' + (who === 'user' ? 'user' : 'bot');
+  if (who !== 'user'){
+    const av = document.createElement('span');
+    av.className = 'mini' + (S.lastWho === who ? ' blank' : '');
+    av.setAttribute('aria-hidden','true');
+    av.innerHTML = S.lastWho === who ? '' :
+      (who === 'agent'
+        ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20c1.2-3.8 3.6-5.4 6.5-5.4s5.3 1.6 6.5 5.4"/></svg>'
+        : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="8" width="18" height="12" rx="4"/><circle cx="9" cy="14" r="1.3" fill="currentColor"/><circle cx="15" cy="14" r="1.3" fill="currentColor"/><path d="M12 8V4"/></svg>');
+    row.appendChild(av);
+  }
+  const b = document.createElement('div');
+  b.className = 'm ' + who;
+  if (tag) b.innerHTML = `<span class="tag">${tag}</span>`;
+  if (who === 'user'){
+    const p = document.createElement('p');
+    p.textContent = html;              // user text never becomes markup
+    b.appendChild(p);
+  } else {
+    b.insertAdjacentHTML('beforeend', `<p>${html}</p>`);
+  }
+  b.insertAdjacentHTML('beforeend', `<span class="t">${clock()}</span>`);
+  row.appendChild(b);
+  log.appendChild(row);
+  S.lastWho = who;
+  scroll();
+  return row;
+}
+
+function system(text){
+  const d = document.createElement('div');
+  d.className = 'sys';
+  d.textContent = text;
+  log.appendChild(d);
+  S.lastWho = 'sys';
+  scroll();
+}
+
+function scroll(){ log.scrollTop = log.scrollHeight; }
+
+function typing(who){
+  const row = document.createElement('div');
+  row.className = 'row bot';
+  row.innerHTML = `<span class="mini blank"></span><div class="m ${who}"><div class="dots"><i></i><i></i><i></i></div></div>`;
+  log.appendChild(row);
+  scroll();
+  return row;
+}
+
+function renderChips(list){
+  chipRow.replaceChildren();
+  (list || []).forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (c.primary ? ' primary' : '');
+    b.type = 'button';
+    b.textContent = c.label;
+    b.addEventListener('click', () => {
+      if (c.send) submit(c.send);
+      else { bubble('user', c.label); renderChips([]); run(c.go); }
+    });
+    chipRow.appendChild(b);
+  });
+}
+
+/* ---------- turn runner ---------- */
+let queue = Promise.resolve();
+const chain = fn => (queue = queue.then(fn).catch(e => console.error(e)));
+
+function speak(who, lines, chips, tag){
+  return chain(async () => {
+    renderChips([]);
+    for (let i = 0; i < lines.length; i++){
+      const t = typing(who);
+      await sleep(i === 0 ? 520 : 680);
+      t.remove();
+      bubble(who, lines[i], i === 0 ? tag : null);
+      if (i < lines.length - 1) await sleep(140);
+    }
+    renderChips(chips);
+  });
+}
+
+function run(id){
+  if (id === 'handoff') return handoff();
+  if (id === 'stuck')   return stuck();
+  if (id === 'agent_ok' || id === 'agent_cancel') return agentReply(id);
+  if (id === 'agent_close') return speak('agent',
+    [`Take care, ${CUSTOMER}. Ticket <span class="mono">${S.ticket}</span> stays open until the money is settled.`], [], 'Specialist');
+  const flow = FLOWS[id];
+  if (!flow) return fallback();
+  S.misses = 0;
+  const out = flow();
+  speak('bot', out.lines, out.chips);
+}
+
+/* Two unproductive attempts is the ceiling. Past that, offer a person. */
+function stuck(){
+  S.misses++;
+  if (S.misses >= 2) return offerHuman();
+  speak('bot', [
+    `Sorry — that wasn't it. Let me narrow it down instead of guessing.`,
+    `Which part is still wrong?`
+  ], [chip('Payment not confirmed','payment_help'), chip('Order not showing','check_order'),
+      chip('Delivery date','track'), HUMAN]);
+}
+
+function fallback(){
+  S.misses++;
+  if (S.misses >= 2) return offerHuman();
+  speak('bot', [
+    `I didn't follow that one. I'm good with orders, payments, refunds, cancellations and returns.`,
+    `Try one of these, or say it another way.`
+  ], HOME);
+}
+
+function offerHuman(){
+  speak('bot', [
+    `I've had two goes at this and I'm not getting you an answer. Enough of that.`,
+    `A specialist can open your payment and order records directly, which I can't do from here.`
+  ], [HUMAN, chip('Keep trying here','home')]);
+}
+
+function handoff(){
+  if (S.handoff){
+    return speak('agent', [`I'm still on the chat with you — go ahead.`], [], 'Specialist');
+  }
+  S.handoff = true;
+  S.misses = 0;
+  const ticket = 'CS-' + Math.floor(48000 + Math.random()*900);
+  S.ticket = ticket;
+  $('#who-name').textContent = 'Support specialist';
+  $('#who-stat').innerHTML = `<span class="live"></span>Ticket ${ticket} · Tier 2 payments`;
+
+  chain(async () => {
+    renderChips([]);
+    system('Handing this to a payments specialist');
+    await sleep(600);
+    system(`Ticket ${ticket} raised · 2 ahead of you · about 3 min`);
+    await sleep(1100);
+    system('Specialist joined the chat');
+  });
+
+  speak('agent', [
+    `Hello ${CUSTOMER}, I've taken over this chat. I have the bot's notes, so you don't have to explain it again.`,
+    `I can see <span class="mono">${ORDER.amount}</span> debited at 11:02 am against <span class="mono">${ORDER.payment.ref}</span>, and no matching confirmation on <span class="mono">${ORDER.id}</span>.`,
+    `I've pushed a reconciliation request to HDFC with priority. If they don't confirm by 11:02 am tomorrow, I'll reverse it from our side rather than wait out the window — you'll see it on ${ORDER.payment.mode}.`
+  ], [chip('That works','agent_ok'), chip('I want it cancelled now','agent_cancel')], 'Specialist');
+}
+
+const AGENT_REPLIES = {
+  agent_ok: () => [
+    `Good. Everything we discussed sits on ticket <span class="mono">${S.ticket}</span>, and you'll get an SMS and an email on each update.`,
+    `I'll keep chasing it from my side — you can close this window.`
+  ],
+  agent_cancel: () => [
+    `Understood. I'm cancelling it now and flagging the refund as priority so it doesn't queue behind the bank confirmation.`,
+    `Expect the reversal in 2–3 business days. Ticket <span class="mono">${S.ticket}</span> stays open until I see it land.`
+  ]
+};
+
+function agentReply(key){
+  const lines = AGENT_REPLIES[key] ? AGENT_REPLIES[key]() : [
+    `Noted — I've added that to ticket <span class="mono">${S.ticket}</span> while I have your record open.`,
+    `Anything else on this order?`
+  ];
+  speak('agent', lines, [chip('Nothing else, thanks','agent_close')], 'Specialist');
+}
+
+function agentFree(){
+  S.agentTurn++;
+  const lines = S.agentTurn === 1
+    ? [`Thanks — I've read that into the ticket.`,
+       `The bank trace is the blocker, and I'm chasing it directly. Nothing further is needed from you right now.`]
+    : [`Added to ticket <span class="mono">${S.ticket}</span>. I'll update you here and by SMS as soon as HDFC responds.`];
+  speak('agent', lines, [chip('Nothing else, thanks','agent_close')], 'Specialist');
+}
+
+/* ---------- input ---------- */
+function submit(text){
+  const t = text.trim();
+  if (!t) return;
+  S.turns++;
+  bubble('user', t);
+  renderChips([]);
+  input.value = '';
+
+  if (S.handoff){
+    const id = detect(t);
+    if (id === 'cancel') return agentReply('agent_cancel');
+    return agentFree();
+  }
+
+  const id = detect(t);
+  if (!id) return fallback();
+  run(id);
+}
+
+$('#composer').addEventListener('submit', e => { e.preventDefault(); submit(input.value); });
+
+/* ---------- open / close / restart ---------- */
+function openChat(prefill){
+  chat.hidden = false;
+  launcher.hidden = true;
+  if (prefill) submit(prefill);
+  else if (window.innerWidth > 600) input.focus();
+}
+function closeChat(){ chat.hidden = true; launcher.hidden = false; }
+
+$('#minimise').addEventListener('click', closeChat);
+$('#launcher').addEventListener('click', () => openChat());
+$('#alert-help').addEventListener('click', () => {
+  openChat();
+  if (S.turns === 0) chain(async () => { await sleep(260); submit(HOME[0].send); });
+});
+$('#to-human').addEventListener('click', () => {
+  if (S.handoff) return;
+  bubble('user', 'Talk to a person');
+  run('handoff');
+});
+$('#restart').addEventListener('click', () => { boot(); input.focus(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !chat.hidden) closeChat(); });
+
+/* ---------- boot ---------- */
+function boot(){
+  queue = Promise.resolve();
+  log.replaceChildren();
+  chipRow.replaceChildren();
+  resetState();
+  $('#who-name').textContent = 'Bazaario Assistant';
+  $('#who-stat').innerHTML = '<span class="live"></span>Replies instantly · 24×7';
+  const out = FLOWS.greet();
+  speak('bot', out.lines, out.chips);
+}
+resetState();
+boot();
+</script>
