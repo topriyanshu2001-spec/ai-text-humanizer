@@ -1,8 +1,11 @@
-# Bazaario support chat
+# Saathi — Bazaario support chat
 
-A customer-support chat box for a marketplace storefront: rule-based intent
+Saathi is the support bot on a marketplace storefront: rule-based intent
 matching, quick-reply buttons, order and payment cards, and a handoff to a
-human specialist once the bot has failed twice.
+human specialist once it has failed twice. The name sits in the register
+Indian marketplaces use for their assistants — short, spoken, vernacular
+(*saathi*, companion) — rather than a generic "Support Assistant" label.
+Rename it in one place, the `BOT` constant.
 
 No build step, no dependencies. One HTML file, vanilla JS. Fonts come from
 Google Fonts; everything else is inline.
