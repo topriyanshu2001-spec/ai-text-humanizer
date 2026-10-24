@@ -153,6 +153,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
 .pill.warn{background:var(--warn-soft);color:var(--warn)}
 .pill.ok{background:var(--ok-soft);color:var(--ok)}
+.care-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 8px}
+.care-num{font-size:19px;font-weight:600;color:var(--accent);text-decoration:none;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.care-num:hover{text-decoration:underline}
+.copy{border:1px solid var(--line);background:var(--sunk);color:var(--muted);border-radius:7px;padding:4px 9px;font-size:11.5px;font-weight:700}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
 .track{list-style:none;margin:10px 0 0;padding:0 0 0 18px;position:relative;font-size:12.5px;display:grid;gap:9px}
 .track::before{content:"";position:absolute;left:4px;top:7px;bottom:7px;width:2px;background:var(--line)}
 .track li{position:relative;display:flex;justify-content:space-between;gap:10px;color:var(--muted)}
@@ -189,6 +194,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .send{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center}
 .send:disabled{opacity:.45;cursor:not-allowed}
 .fine{margin:0;padding:0 12px 9px;font-size:10.5px;color:var(--muted);text-align:center;background:var(--card)}
+.fine a{color:var(--accent);font-weight:700;text-decoration:none}
+.fine a:hover{text-decoration:underline}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 
@@ -293,7 +300,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
     </button>
   </form>
-  <p class="fine">Simulated support bot · no real orders or payments</p>
+  <p class="fine">Rather call? <a href="tel:18001234567">1800 123 4567</a> · 8 am – 11 pm · demo only, nothing connects</p>
 </section>
 
 <script>
@@ -319,6 +326,7 @@ const ORDER = {
   payment:{mode:'UPI · HDFC ••4417', ref:'UPI/428831904477', at:'today, 11:02 am'}
 };
 const PAST_ORDER = {id:'OD117440291835', item:'Handloom cotton kurta (M)', amount:'₹899', delivered:'18 Oct', replaceTill:'25 Oct'};
+const CARE = {phone:'1800 123 4567', dial:'18001234567', hours:'8 am – 11 pm, all days', email:'care@bazaario.example'};
 
 const BUD = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M8 12c-1 5 0 7 2 8"/><circle cx="17" cy="8" r="4"/><path d="M18 12c1 5 0 7-2 8"/></svg>';
 
@@ -365,6 +373,17 @@ const refundCard = id => `
     </dl>
   </div>`;
 
+const careCard = () => `
+  <div class="card">
+    <p class="card-k">Bazaario customer care</p>
+    <div class="care-row">
+      <a class="care-num" href="tel:${CARE.dial}">${CARE.phone}</a>
+      <button class="copy" type="button" data-copy="${CARE.phone}">Copy</button>
+    </div>
+    <p class="card-s">${CARE.hours} · toll free from any Indian number</p>
+    <p class="card-s">Or write to <span class="mono">${CARE.email}</span></p>
+  </div>`;
+
 /* ---------- conversation state ---------- */
 let S = {};
 const resetState = () => { S = {misses:0, handoff:false, turns:0, trace:null, lastWho:null, agentTurn:0}; };
@@ -389,6 +408,10 @@ const INTENTS = [
   {id:'agent', keys:[['talk to a human',5],['talk to human',5],['human',4],['agent',4],['representative',4],
     ['real person',4],['customer care',4],['customer service',3],['executive',3],['supervisor',4],
     ['talk to someone',4],['speak to',3],['connect me',3],['escalate',3],['complaint',2],['kisi se baat',4]]},
+
+  {id:'contact', keys:[['customer care number',5],['care number',4],['contact number',4],['phone number',4],
+    ['helpline',4],['toll free',4],['tollfree',4],['call support',4],['call you',3],['phone',3],
+    ['number',2],['call',2]]},
 
   {id:'payment_deducted', keys:[['money has been deducted',4],['money deducted',4],['amount deducted',4],
     ['payment deducted',4],['money is deducted',4],['deducted',2],['debited',2],['debit',1],['charged',2],
@@ -522,10 +545,16 @@ const FLOWS = {
     `Current address on this order: <strong>${CUSTOMER} · 560076, Bengaluru</strong>. Addresses change from Orders → the order → Change address, and the pincode has to be serviceable for this seller.`
   ], chips:[chip('Where is my order?','track'), ...RESOLVE]}),
 
+  contact: () => ({lines:[
+    `Here's the number — it reaches a person, not another bot.${careCard()}`,
+    `Quote order <span class="mono">${ORDER.id}</span> when you call. It saves you reading out the payment details.`
+  ], chips:[HUMAN, chip('Stay in chat','home')]}),
+
   thanks: () => ({lines:[`Happy to help, ${CUSTOMER}.`], chips:[chip('Something else','home'), chip('End chat','bye')]}),
 
   bye: () => ({lines:[
-    `Closing this chat. The trace on your payment stays open either way, and any update reaches you by SMS.`
+    `Closing this chat. The trace on your payment stays open either way, and any update reaches you by SMS.`,
+    `If you'd rather speak to someone later, this reaches a person directly.${careCard()}`
   ], chips:[chip('Start a new chat','home')]}),
 
   solved: () => {
@@ -625,8 +654,10 @@ function run(id){
   if (id === 'handoff') return handoff();
   if (id === 'stuck')   return stuck();
   if (id === 'agent_ok' || id === 'agent_cancel') return agentReply(id);
-  if (id === 'agent_close') return speak('agent',
-    [`Take care, ${CUSTOMER}. Ticket <span class="mono">${S.ticket}</span> stays open until the money is settled.`], [], 'Specialist');
+  if (id === 'agent_close') return speak('agent', [
+    `Take care, ${CUSTOMER}. Ticket <span class="mono">${S.ticket}</span> stays open until the money is settled.`,
+    `Want an update before I reach you? Call and quote the ticket number.${careCard()}`
+  ], [], 'Specialist');
   const flow = FLOWS[id];
   if (!flow) return fallback();
   S.misses = 0;
@@ -657,7 +688,7 @@ function fallback(){
 function offerHuman(){
   speak('bot', [
     `I've had two goes at this and I'm not getting you an answer. Enough of that.`,
-    `A specialist can open your payment and order records directly, which I can't do from here.`
+    `Two ways out of here. A specialist can take over this chat and open your payment records, or you can call us and skip the typing altogether.${careCard()}`
   ], [HUMAN, chip('Keep trying here','home')]);
 }
 
@@ -737,6 +768,25 @@ function submit(text){
 }
 
 $('#composer').addEventListener('submit', e => { e.preventDefault(); submit(input.value); });
+
+/* Copy the care number. Clipboard access gets refused in plenty of embedded
+   views, so fall back to selecting the number and saying so. */
+log.addEventListener('click', async e => {
+  const btn = e.target.closest('.copy');
+  if (!btn) return;
+  try {
+    await navigator.clipboard.writeText(btn.dataset.copy);
+    btn.textContent = 'Copied';
+  } catch {
+    const range = document.createRange();
+    range.selectNodeContents(btn.parentElement.querySelector('.care-num'));
+    const sel = getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    btn.textContent = 'Selected — press Ctrl/⌘C';
+  }
+  setTimeout(() => { btn.textContent = 'Copy'; }, 2200);
+});
 
 /* ---------- open / close / restart ---------- */
 function openChat(prefill){

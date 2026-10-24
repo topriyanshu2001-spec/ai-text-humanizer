@@ -65,6 +65,17 @@ The handoff raises a ticket, shows a queue position, and the specialist
 arrives already holding the transcript — the amount, the bank reference and
 the order ID — so nothing has to be repeated.
 
+Not everyone wants to keep typing, though. The care number sits in the panel
+footer at all times, appears with a copy button whenever the bot gives up or
+the chat closes, and comes back directly if someone just asks for it
+("customer care number", "helpline", "toll free"). `CARE` holds the number,
+hours and address. The one in the demo is a placeholder that dials nothing —
+swap it before this goes anywhere real.
+
+Copying uses the clipboard API, which embedded browser views often refuse. On
+a refusal it selects the number and says to press Ctrl/⌘C rather than silently
+doing nothing.
+
 ## Adding an intent
 
 `INTENTS` is an ordered list of `{id, keys}`, where `keys` are
